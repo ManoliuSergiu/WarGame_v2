@@ -13,6 +13,7 @@ namespace WarGame_v2
 	public partial class Form1 : Form
 	{
 		int maxheight=255;
+		int offset = 120;
 		int waterlevel = 60;
 		public static Form1 form1;
 		public Form1()
@@ -23,17 +24,20 @@ namespace WarGame_v2
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
+			trackBar1.Value = 6;
+			trackBar3.Value = 6;
 			Bitmap greenscreen = new Bitmap(513, 513);
 			Graphics graphics = Graphics.FromImage(greenscreen);
 			graphics.Clear(Color.Green);
 			
 			backgroundPictureBox.BackgroundImage = greenscreen;
+			backgroundPictureBox.Image = MapRenderer.GetNewMap();
 		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
 			//trackBar1.Value = 6;
-			Bitmap image = MapRenderer.GetNewMap(512,5,maxheight,waterlevel);
+			Bitmap image = MapRenderer.GetNewMap(512,5,maxheight,waterlevel,offset);
 			Graphics graphics = Graphics.FromImage(image);
 			graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 			backgroundPictureBox.Image = image;
@@ -81,6 +85,27 @@ namespace WarGame_v2
 				case 10: maxheight = 245; break;
 				case 11: maxheight = 255; break;
 				default: maxheight = 255; break;
+			}
+		}
+
+		private void trackBar3_Scroll(object sender, EventArgs e)
+		{
+			switch (((TrackBar)sender).Value)
+			{ 
+				case 0:  offset = 20;  break;
+				case 1:  offset = 40;  break;
+				case 2:  offset = 60;  break;
+				case 3:  offset = 80;  break;
+				case 4:  offset = 100; break;
+				case 5:  offset = 120; break;
+				case 6:  offset = 140; break;
+				case 7:  offset = 160; break;
+				case 8:  offset = 180; break;
+				case 9:  offset = 200; break;
+				case 10: offset = 220; break;
+				case 11: offset = 240; break;
+				case 12: offset = 255; break;
+				default: offset = 255; break;
 			}
 		}
 	}

@@ -8,14 +8,14 @@ namespace WarGame_v2
 {
 	class DiamondSquareGen
 	{
-		public static byte[,] Generate(int size = 2048, int min = 1, int max = 255)
+		public static byte[,] Generate(int size = 2048, int min = 1, int max = 255, float offset = 150)
 		{
 			byte[,] heightmap = new byte[size + 1, size + 1];
 			heightmap[0, 0] = (byte)Engine.rnd.Next(min, max);
 			heightmap[size, 0] = (byte)Engine.rnd.Next(min, max); ;
 			heightmap[0, size] = (byte)Engine.rnd.Next(min, max); 
 			heightmap[size, size] = (byte)Engine.rnd.Next(min, max);
-			float offset = max;
+			//float offset = max;
 			int iterations = (int)Math.Log(size, 2);
 			for (int i = 0; i < iterations; i++)
 			{

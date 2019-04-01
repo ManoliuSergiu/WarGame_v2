@@ -12,10 +12,9 @@ namespace WarGame_v2
 	{
 		static byte[,] hMap;
 
-		public static Bitmap GetNewMap(int size = 512, int min = 5, int max = 255, int waterLevel = 60)
+		public static Bitmap GetNewMap(int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
 		{
-			hMap = DiamondSquareGen.Generate(size, min, max);
-
+			hMap = DiamondSquareGen.Generate(size, min, max,offset);
 			return DrawMap(waterLevel, size);
 		}
 
