@@ -32,39 +32,40 @@
 			this.backgroundPictureBox = new System.Windows.Forms.PictureBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.waterLevelGroup = new System.Windows.Forms.GroupBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.trackBar1 = new System.Windows.Forms.TrackBar();
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.maxHeightGroup = new System.Windows.Forms.GroupBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.trackBar2 = new System.Windows.Forms.TrackBar();
-			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.heightVariationGroup = new System.Windows.Forms.GroupBox();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.trackBar3 = new System.Windows.Forms.TrackBar();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.minHeightGroup = new System.Windows.Forms.GroupBox();
 			this.label10 = new System.Windows.Forms.Label();
 			this.label11 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
 			this.trackBar4 = new System.Windows.Forms.TrackBar();
+			this.button2 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).BeginInit();
-			this.groupBox1.SuspendLayout();
+			this.waterLevelGroup.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-			this.groupBox2.SuspendLayout();
+			this.maxHeightGroup.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-			this.groupBox3.SuspendLayout();
+			this.heightVariationGroup.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
-			this.groupBox4.SuspendLayout();
+			this.minHeightGroup.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// button1
 			// 
 			this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button1.Location = new System.Drawing.Point(558, 13);
+			this.button1.Location = new System.Drawing.Point(558, 15);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(99, 70);
 			this.button1.TabIndex = 0;
@@ -98,17 +99,17 @@
 			this.label2.TabIndex = 4;
 			this.label2.Text = "120";
 			// 
-			// groupBox1
+			// waterLevelGroup
 			// 
-			this.groupBox1.Controls.Add(this.label2);
-			this.groupBox1.Controls.Add(this.label3);
-			this.groupBox1.Controls.Add(this.label1);
-			this.groupBox1.Controls.Add(this.trackBar1);
-			this.groupBox1.Location = new System.Drawing.Point(674, 209);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(120, 111);
-			this.groupBox1.TabIndex = 6;
-			this.groupBox1.TabStop = false;
+			this.waterLevelGroup.Controls.Add(this.label2);
+			this.waterLevelGroup.Controls.Add(this.label3);
+			this.waterLevelGroup.Controls.Add(this.label1);
+			this.waterLevelGroup.Controls.Add(this.trackBar1);
+			this.waterLevelGroup.Location = new System.Drawing.Point(674, 209);
+			this.waterLevelGroup.Name = "waterLevelGroup";
+			this.waterLevelGroup.Size = new System.Drawing.Size(120, 111);
+			this.waterLevelGroup.TabIndex = 6;
+			this.waterLevelGroup.TabStop = false;
 			// 
 			// label3
 			// 
@@ -129,17 +130,17 @@
 			this.trackBar1.TabIndex = 2;
 			this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
 			// 
-			// groupBox2
+			// maxHeightGroup
 			// 
-			this.groupBox2.Controls.Add(this.label4);
-			this.groupBox2.Controls.Add(this.label5);
-			this.groupBox2.Controls.Add(this.label6);
-			this.groupBox2.Controls.Add(this.trackBar2);
-			this.groupBox2.Location = new System.Drawing.Point(674, 92);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(120, 111);
-			this.groupBox2.TabIndex = 7;
-			this.groupBox2.TabStop = false;
+			this.maxHeightGroup.Controls.Add(this.label4);
+			this.maxHeightGroup.Controls.Add(this.label5);
+			this.maxHeightGroup.Controls.Add(this.label6);
+			this.maxHeightGroup.Controls.Add(this.trackBar2);
+			this.maxHeightGroup.Location = new System.Drawing.Point(674, 92);
+			this.maxHeightGroup.Name = "maxHeightGroup";
+			this.maxHeightGroup.Size = new System.Drawing.Size(120, 111);
+			this.maxHeightGroup.TabIndex = 7;
+			this.maxHeightGroup.TabStop = false;
 			// 
 			// label4
 			// 
@@ -179,17 +180,17 @@
 			this.trackBar2.Value = 12;
 			this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
 			// 
-			// groupBox3
+			// heightVariationGroup
 			// 
-			this.groupBox3.Controls.Add(this.label7);
-			this.groupBox3.Controls.Add(this.label8);
-			this.groupBox3.Controls.Add(this.label9);
-			this.groupBox3.Controls.Add(this.trackBar3);
-			this.groupBox3.Location = new System.Drawing.Point(548, 209);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(120, 111);
-			this.groupBox3.TabIndex = 7;
-			this.groupBox3.TabStop = false;
+			this.heightVariationGroup.Controls.Add(this.label7);
+			this.heightVariationGroup.Controls.Add(this.label8);
+			this.heightVariationGroup.Controls.Add(this.label9);
+			this.heightVariationGroup.Controls.Add(this.trackBar3);
+			this.heightVariationGroup.Location = new System.Drawing.Point(548, 209);
+			this.heightVariationGroup.Name = "heightVariationGroup";
+			this.heightVariationGroup.Size = new System.Drawing.Size(120, 111);
+			this.heightVariationGroup.TabIndex = 7;
+			this.heightVariationGroup.TabStop = false;
 			// 
 			// label7
 			// 
@@ -228,17 +229,17 @@
 			this.trackBar3.TabIndex = 2;
 			this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
 			// 
-			// groupBox4
+			// minHeightGroup
 			// 
-			this.groupBox4.Controls.Add(this.label10);
-			this.groupBox4.Controls.Add(this.label11);
-			this.groupBox4.Controls.Add(this.label12);
-			this.groupBox4.Controls.Add(this.trackBar4);
-			this.groupBox4.Location = new System.Drawing.Point(548, 92);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(120, 111);
-			this.groupBox4.TabIndex = 8;
-			this.groupBox4.TabStop = false;
+			this.minHeightGroup.Controls.Add(this.label10);
+			this.minHeightGroup.Controls.Add(this.label11);
+			this.minHeightGroup.Controls.Add(this.label12);
+			this.minHeightGroup.Controls.Add(this.trackBar4);
+			this.minHeightGroup.Location = new System.Drawing.Point(548, 92);
+			this.minHeightGroup.Name = "minHeightGroup";
+			this.minHeightGroup.Size = new System.Drawing.Size(120, 111);
+			this.minHeightGroup.TabIndex = 8;
+			this.minHeightGroup.TabStop = false;
 			// 
 			// label10
 			// 
@@ -278,32 +279,44 @@
 			this.trackBar4.Value = 12;
 			this.trackBar4.Scroll += new System.EventHandler(this.trackBar4_Scroll);
 			// 
+			// button2
+			// 
+			this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.button2.Location = new System.Drawing.Point(685, 15);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(99, 70);
+			this.button2.TabIndex = 9;
+			this.button2.Text = "Accept Map";
+			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(826, 539);
-			this.Controls.Add(this.groupBox4);
-			this.Controls.Add(this.groupBox3);
-			this.Controls.Add(this.groupBox2);
+			this.Controls.Add(this.button2);
+			this.Controls.Add(this.minHeightGroup);
+			this.Controls.Add(this.heightVariationGroup);
+			this.Controls.Add(this.maxHeightGroup);
 			this.Controls.Add(this.backgroundPictureBox);
 			this.Controls.Add(this.button1);
-			this.Controls.Add(this.groupBox1);
+			this.Controls.Add(this.waterLevelGroup);
 			this.Name = "Form1";
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).EndInit();
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox1.PerformLayout();
+			this.waterLevelGroup.ResumeLayout(false);
+			this.waterLevelGroup.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-			this.groupBox2.ResumeLayout(false);
-			this.groupBox2.PerformLayout();
+			this.maxHeightGroup.ResumeLayout(false);
+			this.maxHeightGroup.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-			this.groupBox3.ResumeLayout(false);
-			this.groupBox3.PerformLayout();
+			this.heightVariationGroup.ResumeLayout(false);
+			this.heightVariationGroup.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
-			this.groupBox4.ResumeLayout(false);
-			this.groupBox4.PerformLayout();
+			this.minHeightGroup.ResumeLayout(false);
+			this.minHeightGroup.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
 			this.ResumeLayout(false);
 
@@ -315,24 +328,25 @@
 		private System.Windows.Forms.PictureBox backgroundPictureBox;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox waterLevelGroup;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TrackBar trackBar1;
-		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.GroupBox maxHeightGroup;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.TrackBar trackBar2;
-		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.GroupBox heightVariationGroup;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.TrackBar trackBar3;
-		private System.Windows.Forms.GroupBox groupBox4;
+		private System.Windows.Forms.GroupBox minHeightGroup;
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.TrackBar trackBar4;
+		private System.Windows.Forms.Button button2;
 	}
 }
 

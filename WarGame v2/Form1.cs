@@ -118,5 +118,21 @@ namespace WarGame_v2
 			minheight = (int)(waterlevel * ((float)bar.Value / bar.Maximum));
 		
 		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			DisposeFirstStageUi();
+
+		}
+
+		private void DisposeFirstStageUi()
+		{
+			button1.Dispose();
+			button2.Dispose();
+			maxHeightGroup.Dispose();
+			minHeightGroup.Dispose();
+			heightVariationGroup.Dispose();
+			waterLevelGroup.Dispose();
+		}
 	}
 }
