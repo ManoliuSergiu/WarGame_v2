@@ -80,6 +80,7 @@
 			this.backgroundPictureBox.Size = new System.Drawing.Size(513, 513);
 			this.backgroundPictureBox.TabIndex = 1;
 			this.backgroundPictureBox.TabStop = false;
+			this.backgroundPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.backgroundPictureBox_MouseClick);
 			// 
 			// label1
 			// 

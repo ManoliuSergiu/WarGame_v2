@@ -13,9 +13,13 @@ namespace WarGame_v2
 	public partial class Form1 : Form
 	{
 		int maxheight=255;
+		int size = 512;
 		int offset = 120;
 		int waterlevel = 60;
 		int minheight = 1;
+		bool zoomed;
+		Bitmap map;
+		Bitmap zoomedmap;
 		public static Form1 form1;
 		public Form1()
 		{
@@ -28,21 +32,23 @@ namespace WarGame_v2
 			trackBar1.Value = 6;
 			trackBar4.Value = 0;
 			trackBar3.Value = 6;
-			label10.Text = ""+waterlevel;
-			Bitmap greenscreen = new Bitmap(513, 513);
+			label10.Text = "" + waterlevel;
+			Bitmap greenscreen = new Bitmap(size+1, size+1);
 			Graphics graphics = Graphics.FromImage(greenscreen);
 			graphics.Clear(Color.Green);
-			
+
 			backgroundPictureBox.BackgroundImage = greenscreen;
-			backgroundPictureBox.Image = MapRenderer.GetNewMap();
+			backgroundPictureBox.Image = map = MapRenderer.GetNewMap();
+			zoomed = false;
 		}
+
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			Bitmap image = MapRenderer.GetNewMap(512,5,maxheight,waterlevel,offset);
+			Bitmap image = MapRenderer.GetNewMap(size,minheight,maxheight,waterlevel,offset);
 			Graphics graphics = Graphics.FromImage(image);
 			graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-			backgroundPictureBox.Image = image;
+			backgroundPictureBox.Image = map = image;
 			backgroundPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 		}
 
@@ -68,7 +74,7 @@ namespace WarGame_v2
 			}
 			waterlevel = a;
 			label10.Text = "" + waterlevel;
-			backgroundPictureBox.Image = MapRenderer.DrawMap(a);
+			backgroundPictureBox.Image = map = MapRenderer.DrawMap(a);
 		}
 
 		private void trackBar2_Scroll(object sender, EventArgs e)
@@ -133,6 +139,61 @@ namespace WarGame_v2
 			minHeightGroup.Dispose();
 			heightVariationGroup.Dispose();
 			waterLevelGroup.Dispose();
+		}
+
+		private void backgroundPictureBox_MouseClick(object sender, MouseEventArgs e)
+		{
+			if(ModifierKeys.HasFlag(Keys.Control))
+			{
+				if (!zoomed)
+				{
+					zoomedmap= new Bitmap(size+1,size+1);
+					Graphics gfx = Graphics.FromImage(zoomedmap);
+					int x=0;
+					int y;
+					if (e.X - size / 4 < 0)
+					{
+						x = 0;
+					}
+					else
+					{
+						if (e.X+size/4>size+1)
+						{
+							x = size/2;
+						}
+						else
+						{
+							x = e.X - size / 4;
+						}
+					}
+					if (e.Y - size / 4 < 0)
+					{
+						y= 0;
+					}
+					else
+					{
+						if (e.Y + size / 4 > size + 1)
+						{
+							y = size / 2 ;
+						}
+						else
+						{
+							y = e.Y - size / 4;
+						}
+					}
+					gfx.DrawImage(map,new Rectangle(0,0, size + 1, size + 1),new Rectangle(x,y,zoomedmap.Size.Width/2,zoomedmap.Size.Height/2),GraphicsUnit.Pixel);
+					backgroundPictureBox.Image = zoomedmap;
+					zoomed = true;
+				}
+				else
+				{
+					zoomedmap = null;
+					backgroundPictureBox.Image = map;
+					zoomed = false;
+				}
+				backgroundPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+				
+			}
 		}
 	}
 }
