@@ -45,6 +45,11 @@
 			this.label8 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.trackBar3 = new System.Windows.Forms.TrackBar();
+			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.label10 = new System.Windows.Forms.Label();
+			this.label11 = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
+			this.trackBar4 = new System.Windows.Forms.TrackBar();
 			((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -52,6 +57,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
 			this.groupBox3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
+			this.groupBox4.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// button1
@@ -97,7 +104,7 @@
 			this.groupBox1.Controls.Add(this.label3);
 			this.groupBox1.Controls.Add(this.label1);
 			this.groupBox1.Controls.Add(this.trackBar1);
-			this.groupBox1.Location = new System.Drawing.Point(548, 92);
+			this.groupBox1.Location = new System.Drawing.Point(674, 209);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(120, 111);
 			this.groupBox1.TabIndex = 6;
@@ -191,7 +198,7 @@
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(25, 13);
 			this.label7.TabIndex = 4;
-			this.label7.Text = "120";
+			this.label7.Text = "255";
 			// 
 			// label8
 			// 
@@ -208,9 +215,9 @@
 			this.label9.AutoSize = true;
 			this.label9.Location = new System.Drawing.Point(8, 73);
 			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(13, 13);
+			this.label9.Size = new System.Drawing.Size(19, 13);
 			this.label9.TabIndex = 3;
-			this.label9.Text = "0";
+			this.label9.Text = "10";
 			// 
 			// trackBar3
 			// 
@@ -221,11 +228,62 @@
 			this.trackBar3.TabIndex = 2;
 			this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
 			// 
+			// groupBox4
+			// 
+			this.groupBox4.Controls.Add(this.label10);
+			this.groupBox4.Controls.Add(this.label11);
+			this.groupBox4.Controls.Add(this.label12);
+			this.groupBox4.Controls.Add(this.trackBar4);
+			this.groupBox4.Location = new System.Drawing.Point(548, 92);
+			this.groupBox4.Name = "groupBox4";
+			this.groupBox4.Size = new System.Drawing.Size(120, 111);
+			this.groupBox4.TabIndex = 8;
+			this.groupBox4.TabStop = false;
+			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Location = new System.Drawing.Point(89, 73);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(19, 13);
+			this.label10.TabIndex = 4;
+			this.label10.Text = "59";
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label11.Location = new System.Drawing.Point(18, 12);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(85, 20);
+			this.label11.TabIndex = 0;
+			this.label11.Text = "Min Height";
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Location = new System.Drawing.Point(8, 73);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(13, 13);
+			this.label12.TabIndex = 3;
+			this.label12.Text = "1";
+			// 
+			// trackBar4
+			// 
+			this.trackBar4.Location = new System.Drawing.Point(9, 41);
+			this.trackBar4.Maximum = 12;
+			this.trackBar4.Name = "trackBar4";
+			this.trackBar4.Size = new System.Drawing.Size(105, 45);
+			this.trackBar4.TabIndex = 2;
+			this.trackBar4.Value = 12;
+			this.trackBar4.Scroll += new System.EventHandler(this.trackBar4_Scroll);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(826, 539);
+			this.Controls.Add(this.groupBox4);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.backgroundPictureBox);
@@ -244,6 +302,9 @@
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
+			this.groupBox4.ResumeLayout(false);
+			this.groupBox4.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -267,6 +328,11 @@
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.TrackBar trackBar3;
+		private System.Windows.Forms.GroupBox groupBox4;
+		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.TrackBar trackBar4;
 	}
 }
 

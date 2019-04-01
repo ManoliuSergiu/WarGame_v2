@@ -15,6 +15,7 @@ namespace WarGame_v2
 		int maxheight=255;
 		int offset = 120;
 		int waterlevel = 60;
+		int minheight = 1;
 		public static Form1 form1;
 		public Form1()
 		{
@@ -25,7 +26,9 @@ namespace WarGame_v2
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			trackBar1.Value = 6;
+			trackBar4.Value = 0;
 			trackBar3.Value = 6;
+			label10.Text = ""+waterlevel;
 			Bitmap greenscreen = new Bitmap(513, 513);
 			Graphics graphics = Graphics.FromImage(greenscreen);
 			graphics.Clear(Color.Green);
@@ -36,7 +39,6 @@ namespace WarGame_v2
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			//trackBar1.Value = 6;
 			Bitmap image = MapRenderer.GetNewMap(512,5,maxheight,waterlevel,offset);
 			Graphics graphics = Graphics.FromImage(image);
 			graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
@@ -65,6 +67,7 @@ namespace WarGame_v2
 				default: a = 40;  break;
 			}
 			waterlevel = a;
+			label10.Text = "" + waterlevel;
 			backgroundPictureBox.Image = MapRenderer.DrawMap(a);
 		}
 
@@ -107,6 +110,13 @@ namespace WarGame_v2
 				case 12: offset = 255; break;
 				default: offset = 255; break;
 			}
+		}
+
+		private void trackBar4_Scroll(object sender, EventArgs e)
+		{
+			TrackBar bar = (TrackBar)sender;
+			minheight = (int)(waterlevel * ((float)bar.Value / bar.Maximum));
+		
 		}
 	}
 }
