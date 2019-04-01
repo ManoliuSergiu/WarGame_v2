@@ -35,8 +35,8 @@ namespace WarGame_v2
 
 						//Color.FromArgb(122, 255 - hMap[i, j] + waterLevel, 255 - hMap[i, j] + waterLevel, 255 - hMap[i, j] + waterLevel)
 						//Color.FromArgb(255-((hMap[i,j]-waterLevel)*8), 194, 178,128)
-						Color a = Color.FromArgb(100, 255 - hMap[i, j] + waterLevel, 255 - hMap[i, j] + waterLevel, 255 - hMap[i, j] + waterLevel);
-						Color b = Color.FromArgb(255 - (int)((hMap[i, j] - waterLevel) * 6.5f), 234, 208, 150);
+						Color a = Color.FromArgb(122, 255 - hMap[i, j] + waterLevel, 255 - hMap[i, j] + waterLevel, 255 - hMap[i, j] + waterLevel);
+						Color b = Color.FromArgb(255 - (int)((hMap[i, j] - waterLevel) * 8.5f), 234, 208, 150);
 						int auxval = (int)((1 - (a.A / 255f)) * b.A + a.A);
 						Color c = Color.FromArgb(
 							auxval,
