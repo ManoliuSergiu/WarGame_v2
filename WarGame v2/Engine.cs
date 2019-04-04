@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarGame_v2
 {
-	class Engine
+	static partial class Engine
 	{
 		public static Random rnd = new Random();
 	}

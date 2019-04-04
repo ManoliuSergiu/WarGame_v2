@@ -16,7 +16,7 @@ namespace WarGame_v2
 		int size = 512;
 		int offset = 120;
 		int waterlevel = 60;
-		int minheight = 1;
+		int minheight = 5;
 		bool zoomed;
 		Bitmap map;
 		Bitmap zoomedmap;
@@ -30,7 +30,7 @@ namespace WarGame_v2
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			trackBar1.Value = 6;
-			trackBar4.Value = 0;
+			trackBar4.Value = 12;
 			trackBar3.Value = 6;
 			label10.Text = "" + waterlevel;
 			Bitmap greenscreen = new Bitmap(size+1, size+1);
@@ -38,14 +38,14 @@ namespace WarGame_v2
 			graphics.Clear(Color.Green);
 
 			backgroundPictureBox.BackgroundImage = greenscreen;
-			backgroundPictureBox.Image = map = MapRenderer.GetNewMap();
+			backgroundPictureBox.Image = map = Engine.GetNewMap();
 			zoomed = false;
 		}
 
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			Bitmap image = MapRenderer.GetNewMap(size,minheight,maxheight,waterlevel,offset);
+			Bitmap image = Engine.GetNewMap(size,minheight,maxheight,waterlevel,offset);
 			Graphics graphics = Graphics.FromImage(image);
 			graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 			backgroundPictureBox.Image = map = image;
@@ -74,7 +74,7 @@ namespace WarGame_v2
 			}
 			waterlevel = a;
 			label10.Text = "" + waterlevel;
-			backgroundPictureBox.Image = map = MapRenderer.DrawMap(a);
+			backgroundPictureBox.Image = map = Engine.DrawMap(a);
 		}
 
 		private void trackBar2_Scroll(object sender, EventArgs e)
@@ -121,7 +121,7 @@ namespace WarGame_v2
 		private void trackBar4_Scroll(object sender, EventArgs e)
 		{
 			TrackBar bar = (TrackBar)sender;
-			minheight = (int)(waterlevel * ((float)bar.Value / bar.Maximum));
+			minheight = (int)(20 * ((float)(bar.Maximum-bar.Value) / (bar.Maximum)) +5);
 		
 		}
 
@@ -181,6 +181,7 @@ namespace WarGame_v2
 							y = e.Y - size / 4;
 						}
 					}
+					gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
 					gfx.DrawImage(map,new Rectangle(0,0, size + 1, size + 1),new Rectangle(x,y,zoomedmap.Size.Width/2,zoomedmap.Size.Height/2),GraphicsUnit.Pixel);
 					backgroundPictureBox.Image = zoomedmap;
 					zoomed = true;

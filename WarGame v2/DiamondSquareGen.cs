@@ -15,7 +15,6 @@ namespace WarGame_v2
 			heightmap[size, 0] = (byte)Engine.rnd.Next(min, max); ;
 			heightmap[0, size] = (byte)Engine.rnd.Next(min, max); 
 			heightmap[size, size] = (byte)Engine.rnd.Next(min, max);
-			//float offset = max;
 			int iterations = (int)Math.Log(size, 2);
 			for (int i = 0; i < iterations; i++)
 			{
@@ -24,14 +23,14 @@ namespace WarGame_v2
 				{
 					for (int k = 0; k < size; k+=sqSize)
 					{
-						DiamondStep(sqSize,j,k,heightmap,(int) offset);
-						SquareStep(sqSize, j, k, heightmap, (int)offset,size);
+						DiamondStep(sqSize, j, k, heightmap, (int)offset, min, max);
+						SquareStep(sqSize, j, k, heightmap, (int)offset, size, min, max);
 
 					}
 				}
 				offset *= 0.5f;
 			}
-			Smoothing(heightmap,1,size,1);
+			Smoothing(heightmap,1,size,5);
 			return heightmap;
 			
 		}
@@ -65,7 +64,7 @@ namespace WarGame_v2
 
 		}
 
-		private static void SquareStep(int squareSize, int squarePositionX, int squarePositionY, byte[,] heightmap, int offset,int totalSize)
+		private static void SquareStep(int squareSize, int squarePositionX, int squarePositionY, byte[,] heightmap, int offset,int totalSize,int minsize,int maxsize)
 		{
 			int halfSize = (int)(squareSize * 0.5);
 			int centerX = squarePositionX + halfSize;
@@ -73,24 +72,21 @@ namespace WarGame_v2
 
 			int currentX = centerX;
 			int currentY = centerY - halfSize;
-			
-				SubSquareStep(heightmap, offset, totalSize, halfSize, currentX, currentY);
+
+			SubSquareStep(heightmap, offset, totalSize, halfSize, currentX, currentY, minsize, maxsize);
 			currentX = centerX;
 			currentY = centerY + halfSize;
-			
-				SubSquareStep(heightmap, offset, totalSize, halfSize, currentX, currentY);
+			SubSquareStep(heightmap, offset, totalSize, halfSize, currentX, currentY, minsize, maxsize);
 			currentX = centerX - halfSize;
 			currentY = centerY;
-			
-				SubSquareStep(heightmap, offset, totalSize, halfSize, currentX, currentY);
+			SubSquareStep(heightmap, offset, totalSize, halfSize, currentX, currentY, minsize, maxsize);
 			currentX = centerX + halfSize;
 			currentY = centerY;
-			
-				SubSquareStep(heightmap, offset, totalSize, halfSize, currentX, currentY);
+			SubSquareStep(heightmap, offset, totalSize, halfSize, currentX, currentY, minsize, maxsize);
 
 		}
 
-		private static void SubSquareStep(byte[,] heightmap, int offset, int totalSize, int halfSize, int currentX, int currentY)
+		private static void SubSquareStep(byte[,] heightmap, int offset, int totalSize, int halfSize, int currentX, int currentY, int minsize, int maxsize)
 		{
 			int aux = 0, k = 0;
 			int a=0, b=0, c=0, d=0;
@@ -123,12 +119,12 @@ namespace WarGame_v2
 			int aux1 = aux;
 			do
 			{
-				aux1 = aux + Engine.rnd.Next(-offset, offset + 1);
-			} while (aux1 < 1 || aux1 > 255);
+				aux1 = aux + Engine.rnd.Next(-offset - minsize, offset + minsize + 1);
+			} while (aux1 < minsize || aux1 > maxsize);
 			heightmap[currentX, currentY] = (byte)aux1;
 		}
 
-		private static void DiamondStep(int squareSize,int squarePositionX, int squarePositionY, byte[,] heightmap, int offset)
+		private static void DiamondStep(int squareSize,int squarePositionX, int squarePositionY, byte[,] heightmap, int offset, int minsize, int maxsize)
 		{
 			int halfSize = (int)(squareSize * 0.5);
 			int centerX = squarePositionX + halfSize; 
@@ -142,8 +138,8 @@ namespace WarGame_v2
 			int aux1 = aux;
 			do
 			{
-				aux1 = aux + Engine.rnd.Next(-offset, offset+1);
-			} while (aux1<1||aux1>255);
+				aux1 = aux + Engine.rnd.Next(-offset - minsize, offset+minsize+1);
+			} while (aux1<minsize||aux1>maxsize);
 			heightmap[centerX, centerY] = (byte)aux1;
 		}
 	}

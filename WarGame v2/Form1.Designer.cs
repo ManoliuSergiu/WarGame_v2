@@ -247,19 +247,19 @@
 			this.label10.AutoSize = true;
 			this.label10.Location = new System.Drawing.Point(89, 73);
 			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(19, 13);
+			this.label10.Size = new System.Drawing.Size(25, 13);
 			this.label10.TabIndex = 4;
-			this.label10.Text = "59";
+			this.label10.Text = "100";
 			// 
 			// label11
 			// 
 			this.label11.AutoSize = true;
 			this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label11.Location = new System.Drawing.Point(18, 12);
+			this.label11.Location = new System.Drawing.Point(15, 12);
 			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(85, 20);
+			this.label11.Size = new System.Drawing.Size(99, 20);
 			this.label11.TabIndex = 0;
-			this.label11.Text = "Min Height";
+			this.label11.Text = "Smoothness";
 			// 
 			// label12
 			// 

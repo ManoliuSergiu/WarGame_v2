@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WarGame_v2
 {
-	static class MapRenderer
+	static partial class Engine
 	{
 		static byte[,] hMap;
 
@@ -47,9 +47,6 @@ namespace WarGame_v2
 						map.SetPixel(i-posX, j-posY, Color.FromArgb(122, 255 - hMap[i, j] + waterLevel, 255 - hMap[i, j] + waterLevel, 255 - hMap[i, j] + waterLevel));
 					else if (hMap[i, j] >= waterLevel)
 					{
-
-						//Color.FromArgb(122, 255 - hMap[i, j] + waterLevel, 255 - hMap[i, j] + waterLevel, 255 - hMap[i, j] + waterLevel)
-						//Color.FromArgb(255-((hMap[i,j]-waterLevel)*8), 194, 178,128)
 						Color a = Color.FromArgb(122, 255 - hMap[i, j] + waterLevel, 255 - hMap[i, j] + waterLevel, 255 -hMap[i, j ] + waterLevel);
 						Color b = Color.FromArgb(255 - (int)((hMap[i, j] - waterLevel) * 8.5f), 234, 208, 150);
 						int auxval = (int)((1 - (a.A / 255f)) * b.A + a.A);
