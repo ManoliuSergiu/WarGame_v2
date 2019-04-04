@@ -9,5 +9,9 @@ namespace WarGame_v2
 	static partial class Engine
 	{
 		public static Random rnd = new Random();
+		public static byte GetHeight(float x,float y)
+		{
+			return hMap[(int)x, (int)y];
+		}
 	}
 }

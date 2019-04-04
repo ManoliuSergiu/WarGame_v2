@@ -51,6 +51,8 @@
 			this.label12 = new System.Windows.Forms.Label();
 			this.trackBar4 = new System.Windows.Forms.TrackBar();
 			this.button2 = new System.Windows.Forms.Button();
+			this.alternateStyleCheckBox = new System.Windows.Forms.CheckBox();
+			this.debugLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).BeginInit();
 			this.waterLevelGroup.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -98,7 +100,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(25, 13);
 			this.label2.TabIndex = 4;
-			this.label2.Text = "120";
+			this.label2.Text = "100";
 			// 
 			// waterLevelGroup
 			// 
@@ -125,7 +127,6 @@
 			// trackBar1
 			// 
 			this.trackBar1.Location = new System.Drawing.Point(9, 41);
-			this.trackBar1.Maximum = 12;
 			this.trackBar1.Name = "trackBar1";
 			this.trackBar1.Size = new System.Drawing.Size(105, 45);
 			this.trackBar1.TabIndex = 2;
@@ -167,9 +168,9 @@
 			this.label6.AutoSize = true;
 			this.label6.Location = new System.Drawing.Point(8, 73);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(25, 13);
+			this.label6.Size = new System.Drawing.Size(19, 13);
 			this.label6.TabIndex = 3;
-			this.label6.Text = "140";
+			this.label6.Text = "50";
 			// 
 			// trackBar2
 			// 
@@ -224,7 +225,7 @@
 			// trackBar3
 			// 
 			this.trackBar3.Location = new System.Drawing.Point(9, 41);
-			this.trackBar3.Maximum = 12;
+			this.trackBar3.Maximum = 9;
 			this.trackBar3.Name = "trackBar3";
 			this.trackBar3.Size = new System.Drawing.Size(105, 45);
 			this.trackBar3.TabIndex = 2;
@@ -291,11 +292,32 @@
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
+			// alternateStyleCheckBox
+			// 
+			this.alternateStyleCheckBox.AutoSize = true;
+			this.alternateStyleCheckBox.Location = new System.Drawing.Point(548, 327);
+			this.alternateStyleCheckBox.Name = "alternateStyleCheckBox";
+			this.alternateStyleCheckBox.Size = new System.Drawing.Size(92, 17);
+			this.alternateStyleCheckBox.TabIndex = 10;
+			this.alternateStyleCheckBox.Text = "Alternate style";
+			this.alternateStyleCheckBox.UseVisualStyleBackColor = true;
+			this.alternateStyleCheckBox.CheckedChanged += new System.EventHandler(this.alternateStyleCheckBox_CheckedChanged);
+			// 
+			// debugLabel
+			// 
+			this.debugLabel.AutoSize = true;
+			this.debugLabel.Location = new System.Drawing.Point(589, 411);
+			this.debugLabel.Name = "debugLabel";
+			this.debugLabel.Size = new System.Drawing.Size(0, 13);
+			this.debugLabel.TabIndex = 11;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(826, 539);
+			this.Controls.Add(this.debugLabel);
+			this.Controls.Add(this.alternateStyleCheckBox);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.minHeightGroup);
 			this.Controls.Add(this.heightVariationGroup);
@@ -320,6 +342,7 @@
 			this.minHeightGroup.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -348,6 +371,8 @@
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.TrackBar trackBar4;
 		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.CheckBox alternateStyleCheckBox;
+		private System.Windows.Forms.Label debugLabel;
 	}
 }
 

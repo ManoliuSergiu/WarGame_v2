@@ -15,7 +15,7 @@ namespace WarGame_v2
 		int maxheight=255;
 		int size = 512;
 		int offset = 120;
-		int waterlevel = 60;
+		int waterlevel;
 		int minheight = 5;
 		bool zoomed;
 		Bitmap map;
@@ -32,7 +32,7 @@ namespace WarGame_v2
 			trackBar1.Value = 6;
 			trackBar4.Value = 12;
 			trackBar3.Value = 6;
-			label10.Text = "" + waterlevel;
+			waterlevel = (int)(maxheight * ((float)trackBar1.Value / trackBar1.Maximum) / 2 * 0.1f * 10);
 			Bitmap greenscreen = new Bitmap(size+1, size+1);
 			Graphics graphics = Graphics.FromImage(greenscreen);
 			graphics.Clear(Color.Green);
@@ -45,9 +45,7 @@ namespace WarGame_v2
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			Bitmap image = Engine.GetNewMap(size,minheight,maxheight,waterlevel,offset);
-			Graphics graphics = Graphics.FromImage(image);
-			graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+			Bitmap image = Engine.GetNewMap(alternateStyleCheckBox.Checked,size,minheight,maxheight,waterlevel,offset);
 			backgroundPictureBox.Image = map = image;
 			backgroundPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 		}
@@ -55,65 +53,49 @@ namespace WarGame_v2
 		private void trackBar1_Scroll(object sender, EventArgs e)
 		{
 			int a;
-			switch (((TrackBar)sender).Value)
-			{
-				case 0:  a = 0;   break;
-				case 1:  a = 10;  break;
-				case 2:  a = 20;  break;
-				case 3:  a = 30;  break;
-				case 4:  a = 40;  break;
-				case 5:  a = 50;  break;
-				case 6:  a = 60;  break;
-				case 7:  a = 70;  break;
-				case 8:  a = 80;  break;
-				case 9:  a = 90;  break;
-				case 10: a = 100; break;
-				case 11: a = 110; break;
-				case 12: a = 120; break;
-				default: a = 40;  break;
-			}
+			TrackBar aux = (TrackBar)sender;
+			a = (int)(maxheight * ((float)aux.Value / aux.Maximum)/2 * 0.1f * 10);
 			waterlevel = a;
-			label10.Text = "" + waterlevel;
-			backgroundPictureBox.Image = map = Engine.DrawMap(a);
+			backgroundPictureBox.Image = map = Engine.DrawMap(alternateStyleCheckBox.Checked,a);
 		}
 
 		private void trackBar2_Scroll(object sender, EventArgs e)
 		{
-			switch (((TrackBar)sender).Value)
+			TrackBar aux = (TrackBar)sender;
+			switch (aux.Value)
 			{
-				case 0:  maxheight = 140; break;
-				case 1:  maxheight = 150; break;
-				case 2:  maxheight = 161; break;
-				case 3:  maxheight = 171; break;
-				case 4:  maxheight = 182; break;
-				case 5:  maxheight = 192; break;
-				case 6:  maxheight = 203; break;
-				case 7:  maxheight = 213; break;
-				case 8:  maxheight = 224; break;
-				case 9:  maxheight = 234; break;
-				case 10: maxheight = 245; break;
+				case 0:  maxheight = 50; break;
+				case 1:  maxheight = 70; break;
+				case 2:  maxheight = 90; break;
+				case 3:  maxheight = 110; break;
+				case 4:  maxheight = 130; break;
+				case 5:  maxheight = 150; break;
+				case 6:  maxheight = 170; break;
+				case 7:  maxheight = 190; break;
+				case 8:  maxheight = 210; break;
+				case 9:  maxheight = 230; break;
+				case 10: maxheight = 250; break;
 				case 11: maxheight = 255; break;
 				default: maxheight = 255; break;
+
 			}
+			waterlevel=(int)(maxheight * ((float)trackBar1.Value / trackBar1.Maximum) / 2 * 0.1f * 10);
 		}
 
 		private void trackBar3_Scroll(object sender, EventArgs e)
 		{
 			switch (((TrackBar)sender).Value)
 			{ 
-				case 0:  offset = 20;  break;
-				case 1:  offset = 40;  break;
-				case 2:  offset = 60;  break;
+				case 0:  offset = 1;  break;
+				case 1:  offset = 30;  break;
+				case 2:  offset = 50;  break;
 				case 3:  offset = 80;  break;
-				case 4:  offset = 100; break;
-				case 5:  offset = 120; break;
-				case 6:  offset = 140; break;
-				case 7:  offset = 160; break;
-				case 8:  offset = 180; break;
-				case 9:  offset = 200; break;
-				case 10: offset = 220; break;
-				case 11: offset = 240; break;
-				case 12: offset = 255; break;
+				case 4:  offset = 110; break;
+				case 5:  offset = 140; break;
+				case 6:  offset = 170; break;
+				case 7:  offset = 200; break;
+				case 8:  offset = 230; break;
+				case 9:  offset = 255; break;
 				default: offset = 255; break;
 			}
 		}
@@ -145,56 +127,72 @@ namespace WarGame_v2
 		{
 			if(ModifierKeys.HasFlag(Keys.Control))
 			{
-				if (!zoomed)
+				if (zoomed)
+					Unzoom();
+				else
+					Zoom(e);
+
+				backgroundPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+			}
+			if (ModifierKeys.HasFlag(Keys.Alt))
+			{
+				debugLabel.Text = Engine.GetHeight(e.X, e.Y)+"";
+			}
+		}
+
+		private void Unzoom()
+		{
+			zoomedmap = null;
+			backgroundPictureBox.Image = map;
+			zoomed = false;
+		}
+
+		private void Zoom(MouseEventArgs e)
+		{
+			zoomedmap = new Bitmap(size + 1, size + 1);
+			Graphics gfx = Graphics.FromImage(zoomedmap);
+			int x = 0;
+			int y;
+			if (e.X - size / 4 < 0)
+			{
+				x = 0;
+			}
+			else
+			{
+				if (e.X + size / 4 > size + 1)
 				{
-					zoomedmap= new Bitmap(size+1,size+1);
-					Graphics gfx = Graphics.FromImage(zoomedmap);
-					int x=0;
-					int y;
-					if (e.X - size / 4 < 0)
-					{
-						x = 0;
-					}
-					else
-					{
-						if (e.X+size/4>size+1)
-						{
-							x = size/2;
-						}
-						else
-						{
-							x = e.X - size / 4;
-						}
-					}
-					if (e.Y - size / 4 < 0)
-					{
-						y= 0;
-					}
-					else
-					{
-						if (e.Y + size / 4 > size + 1)
-						{
-							y = size / 2 ;
-						}
-						else
-						{
-							y = e.Y - size / 4;
-						}
-					}
-					gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-					gfx.DrawImage(map,new Rectangle(0,0, size + 1, size + 1),new Rectangle(x,y,zoomedmap.Size.Width/2,zoomedmap.Size.Height/2),GraphicsUnit.Pixel);
-					backgroundPictureBox.Image = zoomedmap;
-					zoomed = true;
+					x = size / 2;
 				}
 				else
 				{
-					zoomedmap = null;
-					backgroundPictureBox.Image = map;
-					zoomed = false;
+					x = e.X - size / 4;
 				}
-				backgroundPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-				
 			}
+			if (e.Y - size / 4 < 0)
+			{
+				y = 0;
+			}
+			else
+			{
+				if (e.Y + size / 4 > size + 1)
+				{
+					y = size / 2;
+				}
+				else
+				{
+					y = e.Y - size / 4;
+				}
+			}
+			gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+			gfx.DrawImage(map, new Rectangle(0, 0, size + 1, size + 1), new Rectangle(x, y, zoomedmap.Size.Width / 2, zoomedmap.Size.Height / 2), GraphicsUnit.Pixel);
+			backgroundPictureBox.Image = zoomedmap;
+			zoomed = true;
+		}
+
+		private void alternateStyleCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			backgroundPictureBox.Image = map = Engine.DrawMap(alternateStyleCheckBox.Checked, waterlevel);
+
 		}
 	}
 }

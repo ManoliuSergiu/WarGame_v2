@@ -30,7 +30,7 @@ namespace WarGame_v2
 				}
 				offset *= 0.5f;
 			}
-			Smoothing(heightmap,1,size,5);
+			Smoothing(heightmap,2,size,2);
 			return heightmap;
 			
 		}
