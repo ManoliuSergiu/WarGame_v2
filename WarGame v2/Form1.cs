@@ -14,10 +14,11 @@ namespace WarGame_v2
 	{
 		int maxheight=255;
 		int size = 512;
-		int offset = 120;
+		int offset = 512;
 		int waterlevel;
 		int minheight = 5;
 		bool zoomed;
+		Point zoomPoint;
 		Bitmap map;
 		Bitmap zoomedmap;
 		public static Form1 form1;
@@ -29,16 +30,16 @@ namespace WarGame_v2
 
 		private async void  Form1_Load(object sender, EventArgs e)
 		{
-			trackBar1.Value = 6;
-			trackBar4.Value = 12;
-			trackBar3.Value = 6;
-			waterlevel = (int)(maxheight * ((float)trackBar1.Value / trackBar1.Maximum) / 2 * 0.1f * 10);
+			waterBar.Value = 6;
+			smoothnessBar.Value = 12;
+			variationBar.Value = 6;
+			waterlevel = (int)(maxheight * ((float)waterBar.Value / waterBar.Maximum) / 2 * 0.1f * 10);
 			Bitmap greenscreen = new Bitmap(size+1, size+1);
 			Graphics graphics = Graphics.FromImage(greenscreen);
 			graphics.Clear(Color.Green);
 
 			backgroundPictureBox.BackgroundImage = greenscreen;
-			backgroundPictureBox.Image = map = await Engine.GetNewMap();
+			backgroundPictureBox.Image = map = await Engine.GetNewMap(false,size,minheight,maxheight,waterlevel,offset);
 			zoomed = false;
 		}
 
@@ -47,19 +48,20 @@ namespace WarGame_v2
 		{
 			Bitmap image = await Engine.GetNewMap(alternateStyleCheckBox.Checked,size,minheight,maxheight,waterlevel,offset);
 			backgroundPictureBox.Image = map = image;
+			zoomed = false;
 			backgroundPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 		}
 
-		private void trackBar1_Scroll(object sender, EventArgs e)
+		private async void waterBar_Scroll(object sender, EventArgs e)
 		{
 			int a;
 			TrackBar aux = (TrackBar)sender;
 			a = (int)(maxheight * ((float)aux.Value / aux.Maximum)/2 * 0.1f * 10);
 			waterlevel = a;
-			backgroundPictureBox.Image = map = Engine.DrawMap(alternateStyleCheckBox.Checked,a).Result;
+			backgroundPictureBox.Image = map = await Engine.DrawMap(alternateStyleCheckBox.Checked,a);
 		}
 
-		private void trackBar2_Scroll(object sender, EventArgs e)
+		private void maxHBar_Scroll(object sender, EventArgs e)
 		{
 			TrackBar aux = (TrackBar)sender;
 			switch (aux.Value)
@@ -79,28 +81,16 @@ namespace WarGame_v2
 				default: maxheight = 255; break;
 
 			}
-			waterlevel=(int)(maxheight * ((float)trackBar1.Value / trackBar1.Maximum) / 2 * 0.1f * 10);
+			waterlevel=(int)(maxheight * ((float)waterBar.Value / waterBar.Maximum) / 2 * 0.1f * 10);
 		}
 
-		private void trackBar3_Scroll(object sender, EventArgs e)
+		private void variationBar_Scroll(object sender, EventArgs e)
 		{
-			switch (((TrackBar)sender).Value)
-			{ 
-				case 0:  offset = 1;  break;
-				case 1:  offset = 30;  break;
-				case 2:  offset = 50;  break;
-				case 3:  offset = 80;  break;
-				case 4:  offset = 110; break;
-				case 5:  offset = 140; break;
-				case 6:  offset = 170; break;
-				case 7:  offset = 200; break;
-				case 8:  offset = 230; break;
-				case 9:  offset = 255; break;
-				default: offset = 255; break;
-			}
+			TrackBar bar = (TrackBar)sender;
+			offset = (int)(512 * ((float) bar.Value / (bar.Maximum)));
 		}
 
-		private void trackBar4_Scroll(object sender, EventArgs e)
+		private void smoothnessBar_Scroll(object sender, EventArgs e)
 		{
 			TrackBar bar = (TrackBar)sender;
 			minheight = (int)(20 * ((float)(bar.Maximum-bar.Value) / (bar.Maximum)) +5);
@@ -136,7 +126,7 @@ namespace WarGame_v2
 			}
 			if (ModifierKeys.HasFlag(Keys.Alt))
 			{
-				debugLabel.Text = Engine.GetHeight(e.X, e.Y)+"";
+				debugLabel.Text = Engine.GetHeight(e.X, e.Y)+" - "+ e.X+"/"+e.Y;
 			}
 		}
 
@@ -147,51 +137,20 @@ namespace WarGame_v2
 			zoomed = false;
 		}
 
-		private void Zoom(MouseEventArgs e)
+		private async void Zoom(MouseEventArgs e)
 		{
+			zoomPoint = e.Location;
 			zoomedmap = new Bitmap(size + 1, size + 1);
-			Graphics gfx = Graphics.FromImage(zoomedmap);
-			int x = 0;
-			int y;
-			if (e.X - size / 4 < 0)
-			{
-				x = 0;
-			}
-			else
-			{
-				if (e.X + size / 4 > size + 1)
-				{
-					x = size / 2;
-				}
-				else
-				{
-					x = e.X - size / 4;
-				}
-			}
-			if (e.Y - size / 4 < 0)
-			{
-				y = 0;
-			}
-			else
-			{
-				if (e.Y + size / 4 > size + 1)
-				{
-					y = size / 2;
-				}
-				else
-				{
-					y = e.Y - size / 4;
-				}
-			}
-			gfx.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-			gfx.DrawImage(map, new Rectangle(0, 0, size + 1, size + 1), new Rectangle(x, y, zoomedmap.Size.Width / 2, zoomedmap.Size.Height / 2), GraphicsUnit.Pixel);
+			int x = e.X;
+			int y = e.Y;
+			zoomedmap = await Engine.ZoomMap(x, y,alternateStyleCheckBox.Checked,waterlevel);
 			backgroundPictureBox.Image = zoomedmap;
 			zoomed = true;
 		}
 
-		private void alternateStyleCheckBox_CheckedChanged(object sender, EventArgs e)
+		private async void alternateStyleCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			backgroundPictureBox.Image = map = Engine.DrawMap(alternateStyleCheckBox.Checked, waterlevel).Result;
+			backgroundPictureBox.Image = map = await Engine.DrawMap(alternateStyleCheckBox.Checked, waterlevel);
 
 		}
 	}
