@@ -17,8 +17,8 @@ namespace WarGame_v2
 		int offset = 512;
 		int waterlevel;
 		int minheight = 5;
-		bool zoomed;
-		Point zoomPoint;
+		public bool zoomed;
+		public Point zoomPoint;
 		Bitmap map;
 		Bitmap zoomedmap;
 		public static Form1 form1;
