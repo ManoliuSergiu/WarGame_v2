@@ -12,22 +12,22 @@ namespace WarGame_v2
 	{
 		static byte[,] hMap;
 
-		public static Bitmap GetNewMap(bool colorScheme=false,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
+		public static async Task<Bitmap> GetNewMap(bool colorScheme=false,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
 		{
 			hMap = DiamondSquareGen.Generate(size, min, max,offset);
-			return DrawMap(colorScheme,waterLevel, size);
+			Task getmap = DrawMap(colorScheme,waterLevel, size);
+			Bitmap result = await DrawMap(colorScheme, waterLevel, size);
+			return result;
 		}
 
-		public static Bitmap DrawMap(bool colorScheme = false, int waterLevel=60, int size = 512, int posX = 0, int posY = 0)
+		public static Task<Bitmap> DrawMap(bool colorScheme = false, int waterLevel=60, int size = 512, int posX = 0, int posY = 0)
 		{
+			
 			if (colorScheme)
-			{
-				return MapStyle2(waterLevel, size);
-			}
+				return Task.FromResult<Bitmap>(MapStyle2(waterLevel, size));
 			else
-			{
-				return MapStyle1(waterLevel, size);
-			}
+				return Task.FromResult<Bitmap>(MapStyle1(waterLevel, size));
+
 		}
 
 		private static Bitmap MapStyle2(int waterLevel, int size)
@@ -39,7 +39,7 @@ namespace WarGame_v2
 				{
 					Color color; 
 					if (hMap[i, j] < waterLevel) color = Color.FromArgb(255, 0, 119, 190);
-					else if (hMap[i, j] < waterLevel + 20) color = Color.FromArgb(255 - (int)(((hMap[i, j] / 10 * 10 - waterLevel < 0) ? 0 : hMap[i, j] / 10 * 10 - waterLevel) * 6), 234, 208, 150);
+					else if (hMap[i, j] < waterLevel + 30) color = Color.FromArgb(255 - (int)(((hMap[i, j] / 10 * 10 - waterLevel < 0) ? 0 : hMap[i, j] / 10 * 10 - waterLevel) * 6), 234, 208, 150);
 					else if (hMap[i, j] < waterLevel + 60) color = Color.FromArgb(255, 51, 158, 24);
 					else if (hMap[i, j] < waterLevel + 90) color = Color.FromArgb(255, 51, 138, 24);
 					else if (hMap[i, j] < waterLevel + 120) color = Color.FromArgb(255, 50, 129, 0);

@@ -295,7 +295,7 @@
 			// alternateStyleCheckBox
 			// 
 			this.alternateStyleCheckBox.AutoSize = true;
-			this.alternateStyleCheckBox.Location = new System.Drawing.Point(548, 327);
+			this.alternateStyleCheckBox.Location = new System.Drawing.Point(14, 518);
 			this.alternateStyleCheckBox.Name = "alternateStyleCheckBox";
 			this.alternateStyleCheckBox.Size = new System.Drawing.Size(92, 17);
 			this.alternateStyleCheckBox.TabIndex = 10;

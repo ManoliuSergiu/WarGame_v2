@@ -27,7 +27,7 @@ namespace WarGame_v2
 			form1 = this;
 		}
 
-		private void Form1_Load(object sender, EventArgs e)
+		private async void  Form1_Load(object sender, EventArgs e)
 		{
 			trackBar1.Value = 6;
 			trackBar4.Value = 12;
@@ -38,14 +38,14 @@ namespace WarGame_v2
 			graphics.Clear(Color.Green);
 
 			backgroundPictureBox.BackgroundImage = greenscreen;
-			backgroundPictureBox.Image = map = Engine.GetNewMap();
+			backgroundPictureBox.Image = map = await Engine.GetNewMap();
 			zoomed = false;
 		}
 
 
-		private void button1_Click(object sender, EventArgs e)
+		private async void button1_Click(object sender, EventArgs e)
 		{
-			Bitmap image = Engine.GetNewMap(alternateStyleCheckBox.Checked,size,minheight,maxheight,waterlevel,offset);
+			Bitmap image = await Engine.GetNewMap(alternateStyleCheckBox.Checked,size,minheight,maxheight,waterlevel,offset);
 			backgroundPictureBox.Image = map = image;
 			backgroundPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 		}
@@ -56,7 +56,7 @@ namespace WarGame_v2
 			TrackBar aux = (TrackBar)sender;
 			a = (int)(maxheight * ((float)aux.Value / aux.Maximum)/2 * 0.1f * 10);
 			waterlevel = a;
-			backgroundPictureBox.Image = map = Engine.DrawMap(alternateStyleCheckBox.Checked,a);
+			backgroundPictureBox.Image = map = Engine.DrawMap(alternateStyleCheckBox.Checked,a).Result;
 		}
 
 		private void trackBar2_Scroll(object sender, EventArgs e)
@@ -191,7 +191,7 @@ namespace WarGame_v2
 
 		private void alternateStyleCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			backgroundPictureBox.Image = map = Engine.DrawMap(alternateStyleCheckBox.Checked, waterlevel);
+			backgroundPictureBox.Image = map = Engine.DrawMap(alternateStyleCheckBox.Checked, waterlevel).Result;
 
 		}
 	}
