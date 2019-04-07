@@ -26,30 +26,38 @@ namespace WarGame_v2
 		{
 			InitializeComponent();
 			form1 = this;
+			loadingLabel.Parent = backgroundPictureBox;
 		}
 
 		private async void  Form1_Load(object sender, EventArgs e)
 		{
+			loadingLabel.Visible = true;
 			waterBar.Value = 6;
 			smoothnessBar.Value = 12;
 			variationBar.Value = 6;
 			waterlevel = (int)(maxheight * ((float)waterBar.Value / waterBar.Maximum) / 2 * 0.1f * 10);
+			Task<Bitmap> a = Task.Run(() => Engine.GetNewMap(alternateStyleCheckBox.Checked, size, minheight, maxheight, waterlevel, offset));
 			Bitmap greenscreen = new Bitmap(size+1, size+1);
 			Graphics graphics = Graphics.FromImage(greenscreen);
 			graphics.Clear(Color.Green);
-
 			backgroundPictureBox.BackgroundImage = greenscreen;
-			backgroundPictureBox.Image = map = await Engine.GetNewMap(false,size,minheight,maxheight,waterlevel,offset);
+			backgroundPictureBox.Image = map = await a;
 			zoomed = false;
+			loadingLabel.Visible = false;
+
 		}
 
 
 		private async void button1_Click(object sender, EventArgs e)
 		{
-			Bitmap image = await Engine.GetNewMap(alternateStyleCheckBox.Checked,size,minheight,maxheight,waterlevel,offset);
+			loadingLabel.Visible = true;
+			Task<Bitmap> a =  Task.Run(() => Engine.GetNewMap(alternateStyleCheckBox.Checked, size, minheight, maxheight, waterlevel, offset));
+			Bitmap image = await a;
 			backgroundPictureBox.Image = map = image;
 			zoomed = false;
 			backgroundPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+			loadingLabel.Visible = false;
+
 		}
 
 		private async void waterBar_Scroll(object sender, EventArgs e)
@@ -58,7 +66,7 @@ namespace WarGame_v2
 			TrackBar aux = (TrackBar)sender;
 			a = (int)(maxheight * ((float)aux.Value / aux.Maximum)/2 * 0.1f * 10);
 			waterlevel = a;
-			backgroundPictureBox.Image = map = await Engine.DrawMap(alternateStyleCheckBox.Checked,a);
+			backgroundPictureBox.Image = map = await Task.Run(()=>Engine.DrawMap(alternateStyleCheckBox.Checked,a));
 		}
 
 		private void maxHBar_Scroll(object sender, EventArgs e)
@@ -143,14 +151,15 @@ namespace WarGame_v2
 			zoomedmap = new Bitmap(size + 1, size + 1);
 			int x = e.X;
 			int y = e.Y;
-			zoomedmap = await Engine.ZoomMap(x, y,alternateStyleCheckBox.Checked,waterlevel);
+			zoomedmap = await Task.Run(() => Engine.ZoomMap(x, y, alternateStyleCheckBox.Checked, waterlevel));
 			backgroundPictureBox.Image = zoomedmap;
 			zoomed = true;
 		}
 
 		private async void alternateStyleCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			backgroundPictureBox.Image = map = await Engine.DrawMap(alternateStyleCheckBox.Checked, waterlevel);
+			zoomed = false;
+			backgroundPictureBox.Image = map = await Task.Run(() => Engine.DrawMap(alternateStyleCheckBox.Checked, waterlevel));
 
 		}
 	}

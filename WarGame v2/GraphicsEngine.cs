@@ -13,17 +13,16 @@ namespace WarGame_v2
 		static byte[,] hMap;
 		static byte[,] zoomedMap;
 
-		public static async Task<Bitmap> GetNewMap(bool colorScheme=false,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
+		public static  Bitmap GetNewMap(bool colorScheme=false,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
 		{
 			
-			hMap = await DiamondSquareGen.Generate(size, min, max,offset);
-			zoomedMap =await GenerateZoomedMap(size);
-			Task getmap = DrawMap(colorScheme,waterLevel, size);
-			Bitmap result = await DrawMap(colorScheme, waterLevel, size);
+			hMap =  DiamondSquareGen.Generate(size, min, max,offset);
+			zoomedMap = GenerateZoomedMap(size);
+			Bitmap result = DrawMap(colorScheme, waterLevel, size);
 			return result;
 		}
 
-		private static Task<byte[,]> GenerateZoomedMap(int size)
+		private static byte[,] GenerateZoomedMap(int size)
 		{
 			byte[,] output = new byte[size * 2 + 1, size * 2 + 1];	 
 			for (int i = 0; i < output.GetLength(0)-1; i+=2)
@@ -36,24 +35,24 @@ namespace WarGame_v2
 					output[i+1, j + 1] = (byte)((hMap[i / 2+1, j / 2 + 1] + hMap[i / 2, j / 2]+ hMap[i / 2+1, j / 2] + hMap[i / 2, j / 2+1] +3) / 4);
 				}
 			}
-			return Task.FromResult(output);
+			return output;
 		}
 
-		public static Task<Bitmap> DrawMap(bool colorScheme = false, int waterLevel=60, int size = 512)
+		public static Bitmap DrawMap(bool colorScheme = false, int waterLevel=60, int size = 512)
 		{
 			
 			if (colorScheme)
-				return Task.FromResult<Bitmap>(MapStyle2(hMap, waterLevel, size));
+				return MapStyle2(hMap, waterLevel, size);
 			else
-				return Task.FromResult<Bitmap>(MapStyle1(hMap, waterLevel, size));
+				return MapStyle1(hMap, waterLevel, size);
 		}
 
-		public static Task<Bitmap> ZoomMap(int posX,int posY,bool colorScheme = false, int waterLevel = 60, int size = 512)
+		public static Bitmap ZoomMap(int posX,int posY,bool colorScheme = false, int waterLevel = 60, int size = 512)
 		{
 			if (colorScheme)
-				return Task.FromResult(MapStyle2(zoomedMap, waterLevel, size,posX,posY));
+				return MapStyle2(zoomedMap, waterLevel, size,posX,posY);
 			else
-				return Task.FromResult(MapStyle1(zoomedMap, waterLevel, size,posX,posY));
+				return MapStyle1(zoomedMap, waterLevel, size,posX,posY);
 		}
 
 

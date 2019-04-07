@@ -8,7 +8,7 @@ namespace WarGame_v2
 {
 	class DiamondSquareGen
 	{
-		public static Task<byte[,]> Generate(int size = 2048, int min = 1, int max = 255, float offset = 150)
+		public static byte[,] Generate(int size = 2048, int min = 1, int max = 255, float offset = 150)
 		{
 			byte[,] heightmap = new byte[size + 1, size + 1];
 			heightmap[0, 0] = (byte)Engine.rnd.Next(min, max);
@@ -31,7 +31,7 @@ namespace WarGame_v2
 				offset *= 0.5f;
 			}
 			Smoothing(heightmap,1,size,3);
-			return Task.FromResult(heightmap);
+			return heightmap;
 			
 		}
 

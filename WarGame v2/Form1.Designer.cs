@@ -53,6 +53,7 @@
 			this.button2 = new System.Windows.Forms.Button();
 			this.alternateStyleCheckBox = new System.Windows.Forms.CheckBox();
 			this.debugLabel = new System.Windows.Forms.Label();
+			this.loadingLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).BeginInit();
 			this.waterLevelGroup.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.waterBar)).BeginInit();
@@ -311,11 +312,24 @@
 			this.debugLabel.Size = new System.Drawing.Size(0, 13);
 			this.debugLabel.TabIndex = 11;
 			// 
+			// loadingLabel
+			// 
+			this.loadingLabel.AutoSize = true;
+			this.loadingLabel.BackColor = System.Drawing.Color.Transparent;
+			this.loadingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.loadingLabel.Location = new System.Drawing.Point(18, 475);
+			this.loadingLabel.Name = "loadingLabel";
+			this.loadingLabel.Size = new System.Drawing.Size(152, 33);
+			this.loadingLabel.TabIndex = 12;
+			this.loadingLabel.Text = "Loading...";
+			this.loadingLabel.Visible = false;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(826, 539);
+			this.Controls.Add(this.loadingLabel);
 			this.Controls.Add(this.debugLabel);
 			this.Controls.Add(this.alternateStyleCheckBox);
 			this.Controls.Add(this.button2);
@@ -373,6 +387,7 @@
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.CheckBox alternateStyleCheckBox;
 		private System.Windows.Forms.Label debugLabel;
+		private System.Windows.Forms.Label loadingLabel;
 	}
 }
 
