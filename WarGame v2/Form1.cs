@@ -13,7 +13,7 @@ namespace WarGame_v2
 	public partial class Form1 : Form
 	{
 		int maxheight=255;
-		int size = 512;
+        readonly int size = 512;
 		int offset = 512;
 		int waterlevel;
 		int minheight = 5;
@@ -22,6 +22,7 @@ namespace WarGame_v2
 		Bitmap map;
 		Bitmap zoomedmap;
 		public static Form1 form1;
+		public static Label loadLabel;
 		public Form1()
 		{
 			InitializeComponent();
@@ -31,48 +32,44 @@ namespace WarGame_v2
 
 		private async void  Form1_Load(object sender, EventArgs e)
 		{
-			loadingLabel.Visible = true;
+			loadLabel = loadingLabel;
 			waterBar.Value = 6;
 			smoothnessBar.Value = 12;
 			variationBar.Value = 6;
 			waterlevel = (int)(maxheight * ((float)waterBar.Value / waterBar.Maximum) / 2 * 0.1f * 10);
-			Task<Bitmap> a = Task.Run(() => Engine.GetNewMap(alternateStyleCheckBox.Checked, size, minheight, maxheight, waterlevel, offset));
+			Task<Bitmap> a = Task.Run(() => Engine.GetNewMap(Convert.ToInt32(seedTextBox.Text),alternateStyleCheckBox.Checked, size, minheight, maxheight, waterlevel, offset));
 			Bitmap greenscreen = new Bitmap(size+1, size+1);
 			Graphics graphics = Graphics.FromImage(greenscreen);
 			graphics.Clear(Color.Green);
 			backgroundPictureBox.BackgroundImage = greenscreen;
 			backgroundPictureBox.Image = map = await a;
 			zoomed = false;
-			loadingLabel.Visible = false;
 
 		}
 
 
-		private async void button1_Click(object sender, EventArgs e)
+		private async void Button1_Click(object sender, EventArgs e)
 		{
-			loadingLabel.Visible = true;
-			Task<Bitmap> a =  Task.Run(() => Engine.GetNewMap(alternateStyleCheckBox.Checked, size, minheight, maxheight, waterlevel, offset));
+			Task<Bitmap> a =  Task.Run(() => Engine.GetNewMap(Convert.ToInt32(seedTextBox.Text), alternateStyleCheckBox.Checked, size, minheight, maxheight, waterlevel, offset));
 			Bitmap image = await a;
 			backgroundPictureBox.Image = map = image;
 			zoomed = false;
 			backgroundPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-			loadingLabel.Visible = false;
 
 		}
 
-		private async void waterBar_Scroll(object sender, EventArgs e)
+		private async void WaterBar_Scroll(object sender, EventArgs e)
 		{
 			int a;
-			TrackBar aux = (TrackBar)sender;
-			a = (int)(maxheight * ((float)aux.Value / aux.Maximum)/2 * 0.1f * 10);
+			TrackBar bar = waterBar;
+			a = (int)(maxheight * ((float)bar.Value / bar.Maximum)/2 * 0.1f * 10);
 			waterlevel = a;
-			backgroundPictureBox.Image = map = await Task.Run(()=>Engine.DrawMap(alternateStyleCheckBox.Checked,a));
-		}
+			if(sender==waterBar) backgroundPictureBox.Image = map = await Task.Run(()=>Engine.DrawMap(alternateStyleCheckBox.Checked,a));
+        }
 
-		private void maxHBar_Scroll(object sender, EventArgs e)
+        private void MaxHBar_Scroll(object sender, EventArgs e)
 		{
-			TrackBar aux = (TrackBar)sender;
-			switch (aux.Value)
+			switch (maxHBar.Value)
 			{
 				case 0:  maxheight = 50; break;
 				case 1:  maxheight = 70; break;
@@ -92,20 +89,20 @@ namespace WarGame_v2
 			waterlevel=(int)(maxheight * ((float)waterBar.Value / waterBar.Maximum) / 2 * 0.1f * 10);
 		}
 
-		private void variationBar_Scroll(object sender, EventArgs e)
+		private void VariationBar_Scroll(object sender, EventArgs e)
 		{
-			TrackBar bar = (TrackBar)sender;
+			TrackBar bar = variationBar;
 			offset = (int)(512 * ((float) bar.Value / (bar.Maximum)));
 		}
 
-		private void smoothnessBar_Scroll(object sender, EventArgs e)
+		private void SmoothnessBar_Scroll(object sender, EventArgs e)
 		{
-			TrackBar bar = (TrackBar)sender;
+			TrackBar bar = smoothnessBar;
 			minheight = (int)(20 * ((float)(bar.Maximum-bar.Value) / (bar.Maximum)) +5);
 		
 		}
 
-		private void button2_Click(object sender, EventArgs e)
+		private void Button2_Click(object sender, EventArgs e)
 		{
 			DisposeFirstStageUi();
 
@@ -113,7 +110,7 @@ namespace WarGame_v2
 
 		private void DisposeFirstStageUi()
 		{
-			button1.Dispose();
+			generateMapButton.Dispose();
 			button2.Dispose();
 			maxHeightGroup.Dispose();
 			minHeightGroup.Dispose();
@@ -121,7 +118,7 @@ namespace WarGame_v2
 			waterLevelGroup.Dispose();
 		}
 
-		private void backgroundPictureBox_MouseClick(object sender, MouseEventArgs e)
+		private void BackgroundPictureBox_MouseClick(object sender, MouseEventArgs e)
 		{
 			if(ModifierKeys.HasFlag(Keys.Control))
 			{
@@ -156,11 +153,35 @@ namespace WarGame_v2
 			zoomed = true;
 		}
 
-		private async void alternateStyleCheckBox_CheckedChanged(object sender, EventArgs e)
+		private async void AlternateStyleCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
 			zoomed = false;
 			backgroundPictureBox.Image = map = await Task.Run(() => Engine.DrawMap(alternateStyleCheckBox.Checked, waterlevel));
 
 		}
-	}
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            seedTextBox.Text = "" + Engine.rnd.Next(int.MinValue, int.MaxValue);
+        }
+
+        private void GenerateRandomMapButton_Click(object sender, EventArgs e)
+        {
+            RandomizeSettings(sender,e);
+            Button1_Click(sender, e);
+        }
+
+        private void RandomizeSettings(object sender, EventArgs e)
+        {
+            Button3_Click(sender, e);
+            maxHBar.Value = Engine.rnd.Next(maxHBar.Maximum + 1);
+            smoothnessBar.Value = Engine.rnd.Next(smoothnessBar.Maximum + 1);
+            variationBar.Value = Engine.rnd.Next(variationBar.Maximum + 1);
+            waterBar.Value = Engine.rnd.Next(waterBar.Maximum + 1);
+            MaxHBar_Scroll(sender, e);
+            VariationBar_Scroll(sender, e);
+            SmoothnessBar_Scroll(sender, e);
+            WaterBar_Scroll(sender, e);
+        }
+    }
 }

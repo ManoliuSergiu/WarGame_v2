@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace WarGame_v2
 {
-	static partial class Engine
+    static partial class Engine
 	{
 		static byte[,] hMap;
 		static byte[,] zoomedMap;
 
-		public static  Bitmap GetNewMap(bool colorScheme=false,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
+		public static  Bitmap GetNewMap(int seed,bool colorScheme=false,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
 		{
-			
-			hMap =  DiamondSquareGen.Generate(size, min, max,offset);
+			Form1.loadLabel.Invoke((MethodInvoker)(() => Form1.loadLabel.Visible = true));
+			hMap =  DiamondSquareGen.Generate(seed, size, min, max,offset);
 			zoomedMap = GenerateZoomedMap(size);
 			Bitmap result = DrawMap(colorScheme, waterLevel, size);
+			Form1.loadLabel.Invoke((MethodInvoker)(() => Form1.loadLabel.Visible = false));
 			return result;
 		}
 
