@@ -59,6 +59,12 @@
             this.randomSeedButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.generateRandomMapButton = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.startServerButton = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.portTextBox = new System.Windows.Forms.TextBox();
+            this.ipTextbox = new System.Windows.Forms.TextBox();
+            this.serverStatusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).BeginInit();
             this.waterLevelGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.waterBar)).BeginInit();
@@ -69,6 +75,7 @@
             this.minHeightGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.smoothnessBar)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // generateMapButton
@@ -350,7 +357,7 @@
             // 
             // randomSeedButton
             // 
-            this.randomSeedButton.Location = new System.Drawing.Point(19, 65);
+            this.randomSeedButton.Location = new System.Drawing.Point(19, 70);
             this.randomSeedButton.Name = "randomSeedButton";
             this.randomSeedButton.Size = new System.Drawing.Size(87, 33);
             this.randomSeedButton.TabIndex = 15;
@@ -380,11 +387,70 @@
             this.generateRandomMapButton.UseVisualStyleBackColor = true;
             this.generateRandomMapButton.Click += new System.EventHandler(this.GenerateRandomMapButton_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.serverStatusLabel);
+            this.groupBox2.Controls.Add(this.ipTextbox);
+            this.groupBox2.Controls.Add(this.startServerButton);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.portTextBox);
+            this.groupBox2.Location = new System.Drawing.Point(674, 326);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(120, 111);
+            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabStop = false;
+            // 
+            // startServerButton
+            // 
+            this.startServerButton.Location = new System.Drawing.Point(19, 82);
+            this.startServerButton.Name = "startServerButton";
+            this.startServerButton.Size = new System.Drawing.Size(87, 22);
+            this.startServerButton.TabIndex = 16;
+            this.startServerButton.Text = "Start Server";
+            this.startServerButton.UseVisualStyleBackColor = true;
+            this.startServerButton.Click += new System.EventHandler(this.StartServerButton_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(16, 10);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(55, 20);
+            this.label14.TabIndex = 14;
+            this.label14.Text = "Server";
+            // 
+            // portTextBox
+            // 
+            this.portTextBox.Location = new System.Drawing.Point(19, 57);
+            this.portTextBox.Name = "portTextBox";
+            this.portTextBox.Size = new System.Drawing.Size(87, 20);
+            this.portTextBox.TabIndex = 13;
+            this.portTextBox.Text = "4201";
+            // 
+            // ipTextbox
+            // 
+            this.ipTextbox.Location = new System.Drawing.Point(19, 32);
+            this.ipTextbox.Name = "ipTextbox";
+            this.ipTextbox.Size = new System.Drawing.Size(87, 20);
+            this.ipTextbox.TabIndex = 17;
+            this.ipTextbox.Text = "192.168.0.108";
+            // 
+            // serverStatusLabel
+            // 
+            this.serverStatusLabel.AutoSize = true;
+            this.serverStatusLabel.Location = new System.Drawing.Point(89, 12);
+            this.serverStatusLabel.Name = "serverStatusLabel";
+            this.serverStatusLabel.Size = new System.Drawing.Size(10, 13);
+            this.serverStatusLabel.TabIndex = 18;
+            this.serverStatusLabel.Text = " ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 539);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.generateRandomMapButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.loadingLabel);
@@ -398,7 +464,7 @@
             this.Controls.Add(this.generateMapButton);
             this.Controls.Add(this.waterLevelGroup);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "WarGameServer";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).EndInit();
             this.waterLevelGroup.ResumeLayout(false);
@@ -415,6 +481,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.smoothnessBar)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -453,6 +521,12 @@
         private System.Windows.Forms.Button randomSeedButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button generateRandomMapButton;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox portTextBox;
+        private System.Windows.Forms.Button startServerButton;
+        private System.Windows.Forms.TextBox ipTextbox;
+        private System.Windows.Forms.Label serverStatusLabel;
     }
 }
 

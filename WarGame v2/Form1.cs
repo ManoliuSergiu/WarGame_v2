@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
 
 namespace WarGame_v2
 {
@@ -182,6 +183,29 @@ namespace WarGame_v2
             VariationBar_Scroll(sender, e);
             SmoothnessBar_Scroll(sender, e);
             WaterBar_Scroll(sender, e);
+        }
+
+        private void StartServerButton_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(portTextBox.Text, out int result))
+            {
+                if (IPAddress.TryParse(ipTextbox.Text,out IPAddress ip))
+                {
+                    bool check = Engine.StartServer(ip, result);
+                    if (check)
+                    {
+                        serverStatusLabel.Text = "ok";
+                    } 
+                }
+                else
+                {
+                    ipTextbox.Text = "Invalid IP";
+                }
+            }
+            else
+            {
+                portTextBox.Text = "Invalid Port";
+            }
         }
     }
 }
