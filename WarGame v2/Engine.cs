@@ -15,7 +15,7 @@ namespace WarGame_v2
         public static TcpListener server;
 		public static Random rnd = new Random();
         private static List<TcpClient> clients = new List<TcpClient>();
-
+        public static char[] separators = { ':', '|' };
         public static bool StartServer(IPAddress ip,int port)
         {
             server = new TcpListener(ip, port);
@@ -23,7 +23,14 @@ namespace WarGame_v2
             ListenForClients();
             return true;
         }
-
+        private static void SendString(string data)
+        {
+            foreach (TcpClient client in clients)
+            {
+                byte[] msg = Encoding.ASCII.GetBytes(data);
+                client.GetStream().Write(msg, 0, msg.Length);
+            }
+        }
         private async static void ListenForClients()
         {
             while (clients.Count<2)
@@ -31,7 +38,7 @@ namespace WarGame_v2
                 TcpClient client = await server.AcceptTcpClientAsync();
                 clients.Add(client);
                 NetworkStream stream = client.GetStream();
-                byte[] msg = Encoding.ASCII.GetBytes("0:"+clients.Count);
+                byte[] msg = Encoding.ASCII.GetBytes("Initialization:"+clients.Count);
                 stream.Write(msg,0,msg.Length);
             }
         }

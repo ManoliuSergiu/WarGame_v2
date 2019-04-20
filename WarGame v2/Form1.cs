@@ -24,6 +24,7 @@ namespace WarGame_v2
 		Bitmap zoomedmap;
 		public static Form1 form1;
 		public static Label loadLabel;
+        public static bool drawStyle = true;
 		public Form1()
 		{
 			InitializeComponent();
@@ -38,7 +39,7 @@ namespace WarGame_v2
 			smoothnessBar.Value = 12;
 			variationBar.Value = 6;
 			waterlevel = (int)(maxheight * ((float)waterBar.Value / waterBar.Maximum) / 2 * 0.1f * 10);
-			Task<Bitmap> a = Task.Run(() => Engine.GetNewMap(Convert.ToInt32(seedTextBox.Text),alternateStyleCheckBox.Checked, size, minheight, maxheight, waterlevel, offset));
+			Task<Bitmap> a = Task.Run(() => Engine.GetNewMap(Convert.ToInt32(seedTextBox.Text), size, minheight, maxheight, waterlevel, offset));
 			Bitmap greenscreen = new Bitmap(size+1, size+1);
 			Graphics graphics = Graphics.FromImage(greenscreen);
 			graphics.Clear(Color.Green);
@@ -51,7 +52,7 @@ namespace WarGame_v2
 
 		private async void Button1_Click(object sender, EventArgs e)
 		{
-			Task<Bitmap> a =  Task.Run(() => Engine.GetNewMap(Convert.ToInt32(seedTextBox.Text), alternateStyleCheckBox.Checked, size, minheight, maxheight, waterlevel, offset));
+			Task<Bitmap> a =  Task.Run(() => Engine.GetNewMap(Convert.ToInt32(seedTextBox.Text), size, minheight, maxheight, waterlevel, offset));
 			Bitmap image = await a;
 			backgroundPictureBox.Image = map = image;
 			zoomed = false;
@@ -65,7 +66,7 @@ namespace WarGame_v2
 			TrackBar bar = waterBar;
 			a = (int)(maxheight * ((float)bar.Value / bar.Maximum)/2 * 0.1f * 10);
 			waterlevel = a;
-			if(sender==waterBar) backgroundPictureBox.Image = map = await Task.Run(()=>Engine.DrawMap(alternateStyleCheckBox.Checked,a));
+			if(sender==waterBar) backgroundPictureBox.Image = map = await Task.Run(()=>Engine.DrawMap(a));
         }
 
         private void MaxHBar_Scroll(object sender, EventArgs e)
@@ -157,7 +158,8 @@ namespace WarGame_v2
 		private async void AlternateStyleCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
 			zoomed = false;
-			backgroundPictureBox.Image = map = await Task.Run(() => Engine.DrawMap(alternateStyleCheckBox.Checked, waterlevel));
+            drawStyle = alternateStyleCheckBox.Checked;
+			backgroundPictureBox.Image = map = await Task.Run(() => Engine.DrawMap(waterlevel));
 
 		}
 

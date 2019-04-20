@@ -35,7 +35,10 @@
             this.label14 = new System.Windows.Forms.Label();
             this.portTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.backgroundPictureBox = new System.Windows.Forms.PictureBox();
+            this.alternateStyleCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -105,17 +108,39 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "label1";
             // 
-            // Form1
+            // backgroundPictureBox
+            // 
+            this.backgroundPictureBox.Location = new System.Drawing.Point(211, 0);
+            this.backgroundPictureBox.Name = "backgroundPictureBox";
+            this.backgroundPictureBox.Size = new System.Drawing.Size(513, 513);
+            this.backgroundPictureBox.TabIndex = 19;
+            this.backgroundPictureBox.TabStop = false;
+            // 
+            // alternateStyleCheckBox
+            // 
+            this.alternateStyleCheckBox.AutoSize = true;
+            this.alternateStyleCheckBox.Location = new System.Drawing.Point(19, 160);
+            this.alternateStyleCheckBox.Name = "alternateStyleCheckBox";
+            this.alternateStyleCheckBox.Size = new System.Drawing.Size(92, 17);
+            this.alternateStyleCheckBox.TabIndex = 20;
+            this.alternateStyleCheckBox.Text = "Alternate style";
+            this.alternateStyleCheckBox.UseVisualStyleBackColor = true;
+            this.alternateStyleCheckBox.CheckedChanged += new System.EventHandler(this.AlternateStyleCheckBox_CheckedChanged);
+            // 
+            // ConnectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(158, 164);
+            this.ClientSize = new System.Drawing.Size(889, 525);
+            this.Controls.Add(this.alternateStyleCheckBox);
+            this.Controls.Add(this.backgroundPictureBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
-            this.Name = "Form1";
+            this.Name = "ConnectionForm";
             this.Text = "Form1";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,6 +154,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox portTextBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox backgroundPictureBox;
+        private System.Windows.Forms.CheckBox alternateStyleCheckBox;
     }
 }
 

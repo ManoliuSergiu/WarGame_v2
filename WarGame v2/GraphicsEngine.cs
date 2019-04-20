@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace WarGame_v2
@@ -8,17 +9,20 @@ namespace WarGame_v2
 		static byte[,] hMap;
 		static byte[,] zoomedMap;
 
-		public static  Bitmap GetNewMap(int seed,bool colorScheme=false,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
+		public static  Bitmap GetNewMap(int seed,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
 		{
 			Form1.loadLabel.Invoke((MethodInvoker)(() => Form1.loadLabel.Visible = true));
+            SendString("MapGeneration:"+seed+"|"+size + "|" +min + "|" +max + "|" +waterLevel + "|" +offset);
 			hMap =  DiamondSquareGen.Generate(seed, size, min, max,offset);
 			zoomedMap = GenerateZoomedMap(size);
-			Bitmap result = DrawMap(colorScheme, waterLevel, size);
+			Bitmap result = DrawMap(waterLevel, size);
 			Form1.loadLabel.Invoke((MethodInvoker)(() => Form1.loadLabel.Visible = false));
 			return result;
 		}
 
-		private static byte[,] GenerateZoomedMap(int size)
+       
+
+        private static byte[,] GenerateZoomedMap(int size)
 		{
 			byte[,] output = new byte[size * 2 + 1, size * 2 + 1];	 
 			for (int i = 0; i < output.GetLength(0)-1; i+=2)
@@ -34,10 +38,10 @@ namespace WarGame_v2
 			return output;
 		}
 
-		public static Bitmap DrawMap(bool colorScheme = false, int waterLevel=60, int size = 512)
+		public static Bitmap DrawMap(int waterLevel=60, int size = 512)
 		{
 			
-			if (colorScheme)
+			if (Form1.drawStyle)
 				return MapStyle2(hMap, waterLevel, size);
 			else
 				return MapStyle1(hMap, waterLevel, size);

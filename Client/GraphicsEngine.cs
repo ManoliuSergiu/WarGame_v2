@@ -6,14 +6,17 @@ namespace Client
     static partial class Engine
 	{
 		static byte[,] hMap;
-		static byte[,] zoomedMap;
+        public static int maxheight = 255;
+        public static int size = 512;
+        public static int offset = 512;
+        public static int waterlevel;
+        public static int minheight = 5;
 
-		public static  Bitmap GetNewMap(int seed,bool colorScheme=false,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
+        public static  Bitmap GetNewMap(int seed,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
 		{
 			//Form1.loadLabel.Invoke((MethodInvoker)(() => Form1.loadLabel.Visible = true));
 			hMap =  DiamondSquareGen.Generate(seed, size, min, max,offset);
-			zoomedMap = GenerateZoomedMap(size);
-			Bitmap result = DrawMap(colorScheme, waterLevel, size);
+			Bitmap result = DrawMap(waterLevel, size);
 			//Form1.loadLabel.Invoke((MethodInvoker)(() => Form1.loadLabel.Visible = false));
 			return result;
 		}
@@ -34,10 +37,10 @@ namespace Client
 			return output;
 		}
 
-		public static Bitmap DrawMap(bool colorScheme = false, int waterLevel=60, int size = 512)
+		public static Bitmap DrawMap(int waterLevel=60, int size = 512)
 		{
 			
-			if (colorScheme)
+			if (ConnectionForm.style)
 				return MapStyle2(hMap, waterLevel, size);
 			else
 				return MapStyle1(hMap, waterLevel, size);
