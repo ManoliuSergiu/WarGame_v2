@@ -60,11 +60,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.generateRandomMapButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.serverStatusLabel = new System.Windows.Forms.Label();
+            this.ipTextbox = new System.Windows.Forms.TextBox();
             this.startServerButton = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.portTextBox = new System.Windows.Forms.TextBox();
-            this.ipTextbox = new System.Windows.Forms.TextBox();
-            this.serverStatusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).BeginInit();
             this.waterLevelGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.waterBar)).BeginInit();
@@ -144,7 +144,6 @@
             this.waterBar.Name = "waterBar";
             this.waterBar.Size = new System.Drawing.Size(105, 45);
             this.waterBar.TabIndex = 2;
-            this.waterBar.Scroll += new System.EventHandler(this.WaterBar_Scroll);
             // 
             // maxHeightGroup
             // 
@@ -400,6 +399,23 @@
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             // 
+            // serverStatusLabel
+            // 
+            this.serverStatusLabel.AutoSize = true;
+            this.serverStatusLabel.Location = new System.Drawing.Point(89, 12);
+            this.serverStatusLabel.Name = "serverStatusLabel";
+            this.serverStatusLabel.Size = new System.Drawing.Size(10, 13);
+            this.serverStatusLabel.TabIndex = 18;
+            this.serverStatusLabel.Text = " ";
+            // 
+            // ipTextbox
+            // 
+            this.ipTextbox.Location = new System.Drawing.Point(19, 32);
+            this.ipTextbox.Name = "ipTextbox";
+            this.ipTextbox.Size = new System.Drawing.Size(87, 20);
+            this.ipTextbox.TabIndex = 17;
+            this.ipTextbox.Text = "192.168.0.108";
+            // 
             // startServerButton
             // 
             this.startServerButton.Location = new System.Drawing.Point(19, 82);
@@ -427,23 +443,6 @@
             this.portTextBox.Size = new System.Drawing.Size(87, 20);
             this.portTextBox.TabIndex = 13;
             this.portTextBox.Text = "4201";
-            // 
-            // ipTextbox
-            // 
-            this.ipTextbox.Location = new System.Drawing.Point(19, 32);
-            this.ipTextbox.Name = "ipTextbox";
-            this.ipTextbox.Size = new System.Drawing.Size(87, 20);
-            this.ipTextbox.TabIndex = 17;
-            this.ipTextbox.Text = "192.168.0.108";
-            // 
-            // serverStatusLabel
-            // 
-            this.serverStatusLabel.AutoSize = true;
-            this.serverStatusLabel.Location = new System.Drawing.Point(89, 12);
-            this.serverStatusLabel.Name = "serverStatusLabel";
-            this.serverStatusLabel.Size = new System.Drawing.Size(10, 13);
-            this.serverStatusLabel.TabIndex = 18;
-            this.serverStatusLabel.Text = " ";
             // 
             // Form1
             // 

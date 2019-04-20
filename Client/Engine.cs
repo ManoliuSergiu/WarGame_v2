@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
-using System.Drawing;
+using System.Diagnostics;
 
 namespace Client
 {
@@ -15,13 +13,23 @@ namespace Client
         public static char[] mainSeparator = { ':' };
         public static char[] secondarySeparator = { '|' };
         public static bool team; //true = blue, false = red
+        public static Random rnd = new Random();
         internal static bool ConnectToServer(IPAddress ip, int port)
         {
             client = new TcpClient();
-            client.Connect(ip, port);
-            NetworkStream stream = client.GetStream();
-            Task.Run(()=>Listen(stream));
-            return true;
+            try
+            {
+                client.Connect(ip, port);
+                NetworkStream stream = client.GetStream();
+                Task.Run(()=>Listen(stream));
+                return true;
+            }
+        
+            catch (Exception)
+            {
+
+                return false;
+            } 
         }
 
         private static void Listen(NetworkStream stream)
@@ -30,15 +38,21 @@ namespace Client
             {
 
                 Byte[] bytes = new Byte[256];
-                string data = null;
+                string data;
                 int i = stream.Read(bytes, 0, bytes.Length);
                 data = Encoding.ASCII.GetString(bytes, 0, i);
                 if (i != 0)
                 {
                     InterpretString(data);
-                    ConnectionForm.form.Invoke(new Action(() => ConnectionForm.label.Text = data));
+                    Debug.WriteLine(data);
                 }
             }
+        }
+
+        public static void SendString(string data)
+        {
+            byte[] msg = Encoding.ASCII.GetBytes(data);
+            client.GetStream().Write(msg, 0, msg.Length);
         }
 
         private static void InterpretString(string data)
@@ -52,29 +66,18 @@ namespace Client
                         else team = false;
                         break;
                     case "MapGeneration":
-                        ConnectionForm.ChangeMap(GetNewMap(splitdata[1]));
+                        MapSelection.bgPictureBox.Image = GetNewMap(splitdata[1]);
                         break;
+                    case "WaterLevelChange":
+                        if (hMap != null) MapSelection.bgPictureBox.Image = DrawMap(splitdata[1]);
+                        break;
+
                     default:
                         break;
                 }
             }
         }
 
-        private static Bitmap GetNewMap(string v)
-        {
-            string[] mapSettings = v.Split(secondarySeparator);
 
-            size =       Convert.ToInt32(mapSettings[1]);
-            minheight =  Convert.ToInt32(mapSettings[2]);
-            minheight =  Convert.ToInt32(mapSettings[3]);
-            waterlevel = Convert.ToInt32(mapSettings[4]);
-            offset =     Convert.ToInt32(mapSettings[5]);
-
-            return GetNewMap(Convert.ToInt32(mapSettings[0]), Convert.ToInt32(mapSettings[1]), 
-                             Convert.ToInt32(mapSettings[2]), Convert.ToInt32(mapSettings[3]), 
-                             Convert.ToInt32(mapSettings[4]), Convert.ToInt32(mapSettings[5]));
-
-
-        }
     }
 }

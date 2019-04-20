@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Client
@@ -21,39 +22,23 @@ namespace Client
 			return result;
 		}
 
-		private static byte[,] GenerateZoomedMap(int size)
-		{
-			byte[,] output = new byte[size * 2 + 1, size * 2 + 1];	 
-			for (int i = 0; i < output.GetLength(0)-1; i+=2)
-			{
-				for (int j = 0; j < output.GetLength(1)-1; j+=2)
-				{
-					output[i, j] = hMap[i / 2, j / 2];
-					output[i + 1, j] = (byte)((hMap[i / 2, j / 2] + hMap[i / 2 + 1, j / 2]+1) / 2);
-					output[i, j + 1] = (byte)((hMap[i / 2, j / 2 + 1] + hMap[i / 2, j / 2 + 1]+1) / 2);
-					output[i+1, j + 1] = (byte)((hMap[i / 2+1, j / 2 + 1] + hMap[i / 2, j / 2]+ hMap[i / 2+1, j / 2] + hMap[i / 2, j / 2+1] +3) / 4);
-				}
-			}
-			return output;
-		}
-
-		public static Bitmap DrawMap(int waterLevel=60, int size = 512)
-		{
-			
-			if (ConnectionForm.style)
-				return MapStyle2(hMap, waterLevel, size);
-			else
-				return MapStyle1(hMap, waterLevel, size);
-		}
-
-		public static Bitmap ZoomMap(int posX,int posY,bool colorScheme = false, int waterLevel = 60, int size = 512)
-		{
-			if (colorScheme)
-				return MapStyle2(zoomedMap, waterLevel, size,posX,posY);
-			else
-				return MapStyle1(zoomedMap, waterLevel, size,posX,posY);
-		}
-
+        public static Bitmap DrawMap(string data)
+        {
+            waterlevel = Convert.ToInt32(data);
+            return DrawMap(waterlevel);
+           
+        }
+        public static Bitmap DrawMap(int waterLevel = 60, int size = 512)
+        {
+            if (hMap != null)
+            {
+                if (MapSelection.style)
+                    return MapStyle2(hMap, waterLevel, size);
+                else
+                    return MapStyle1(hMap, waterLevel, size);
+            }
+            return new Bitmap(size+1,size+1);
+        }
 
 		private static Bitmap MapStyle2(byte[,] heightMap, int waterLevel, int size, int posX = 0,int posY = 0)
 		{
@@ -118,8 +103,23 @@ namespace Client
 			}
 			return map;
 		}
+        private static Bitmap GetNewMap(string v)
+        {
+            string[] mapSettings = v.Split(secondarySeparator);
 
-		private static void NormalizeXY(int size, ref int posX, ref int posY)
+            size =       Convert.ToInt32(mapSettings[1]);
+            minheight =  Convert.ToInt32(mapSettings[2]);
+            maxheight =  Convert.ToInt32(mapSettings[3]);
+            waterlevel = Convert.ToInt32(mapSettings[4]);
+            offset =     Convert.ToInt32(mapSettings[5]);
+
+            return GetNewMap(Convert.ToInt32(mapSettings[0]), Convert.ToInt32(mapSettings[1]),
+                             Convert.ToInt32(mapSettings[2]), Convert.ToInt32(mapSettings[3]),
+                             Convert.ToInt32(mapSettings[4]), Convert.ToInt32(mapSettings[5]));
+
+
+        }
+        private static void NormalizeXY(int size, ref int posX, ref int posY)
 		{
 			int border = size / 10;
 			if (posX != 0)

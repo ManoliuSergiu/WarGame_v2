@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
+using System.Diagnostics;
 
 namespace WarGame_v2
 {
@@ -15,7 +16,8 @@ namespace WarGame_v2
         public static TcpListener server;
 		public static Random rnd = new Random();
         private static List<TcpClient> clients = new List<TcpClient>();
-        public static char[] separators = { ':', '|' };
+        public static char[] mainSeparator = { ':' };
+        public static char[] secondarySeparator = { '|' };
         public static bool StartServer(IPAddress ip,int port)
         {
             server = new TcpListener(ip, port);
@@ -23,13 +25,52 @@ namespace WarGame_v2
             ListenForClients();
             return true;
         }
-        private static void SendString(string data)
+        private static void Listen(NetworkStream stream)
+        {
+            while (true)
+            {
+
+                Byte[] bytes = new Byte[256];
+                string data;
+                int i = stream.Read(bytes, 0, bytes.Length);
+                data = Encoding.ASCII.GetString(bytes, 0, i);
+                if (i != 0)
+                {
+                    InterpretString(data);
+                    Debug.WriteLine("Server recieved: "+data);
+                }
+            }
+        }
+
+        private static void InterpretString(string data)
+        {
+            string[] splitdata = data.Split(mainSeparator, StringSplitOptions.RemoveEmptyEntries);
+            {
+                switch (splitdata[0])
+                {
+                    case "MapGeneration":
+                        Form1.bgPictureBox.Image = GetNewMap(splitdata[1]);
+                        break;
+                    case "WaterLevelChange":
+                        Form1.bgPictureBox.Image = GetNewMap(splitdata[1]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        public static void SendString(string data)
         {
             foreach (TcpClient client in clients)
             {
                 byte[] msg = Encoding.ASCII.GetBytes(data);
                 client.GetStream().Write(msg, 0, msg.Length);
             }
+        }
+        public static void SendString(string data,int index)
+        {
+            byte[] msg = Encoding.ASCII.GetBytes(data);
+            clients[index].GetStream().Write(msg, 0, msg.Length);
         }
         private async static void ListenForClients()
         {
@@ -38,9 +79,11 @@ namespace WarGame_v2
                 TcpClient client = await server.AcceptTcpClientAsync();
                 clients.Add(client);
                 NetworkStream stream = client.GetStream();
+                _ = Task.Run(() => Listen(stream));
                 byte[] msg = Encoding.ASCII.GetBytes("Initialization:"+clients.Count);
                 stream.Write(msg,0,msg.Length);
             }
+            
         }
 
         public static byte GetHeight(int x,int y)
