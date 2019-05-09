@@ -65,6 +65,7 @@
             this.startServerButton = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.portTextBox = new System.Windows.Forms.TextBox();
+            this.nrConnectedLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).BeginInit();
             this.waterLevelGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.waterBar)).BeginInit();
@@ -444,11 +445,22 @@
             this.portTextBox.TabIndex = 13;
             this.portTextBox.Text = "4201";
             // 
+            // nrConnectedLabel
+            // 
+            this.nrConnectedLabel.AutoSize = true;
+            this.nrConnectedLabel.Location = new System.Drawing.Point(337, 522);
+            this.nrConnectedLabel.Name = "nrConnectedLabel";
+            this.nrConnectedLabel.Size = new System.Drawing.Size(41, 13);
+            this.nrConnectedLabel.TabIndex = 17;
+            this.nrConnectedLabel.Text = "label15";
+            this.nrConnectedLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 539);
+            this.Controls.Add(this.nrConnectedLabel);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.generateRandomMapButton);
             this.Controls.Add(this.groupBox1);
@@ -526,6 +538,7 @@
         private System.Windows.Forms.Button startServerButton;
         private System.Windows.Forms.TextBox ipTextbox;
         private System.Windows.Forms.Label serverStatusLabel;
+        private System.Windows.Forms.Label nrConnectedLabel;
     }
 }
 

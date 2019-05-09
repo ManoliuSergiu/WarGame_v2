@@ -15,10 +15,8 @@ namespace Client
 
         public static  Bitmap GetNewMap(int seed,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
 		{
-			//Form1.loadLabel.Invoke((MethodInvoker)(() => Form1.loadLabel.Visible = true));
 			hMap =  DiamondSquareGen.Generate(seed, size, min, max,offset);
 			Bitmap result = DrawMap(waterLevel, size);
-			//Form1.loadLabel.Invoke((MethodInvoker)(() => Form1.loadLabel.Visible = false));
 			return result;
 		}
 
@@ -106,7 +104,9 @@ namespace Client
         private static Bitmap GetNewMap(string v)
         {
             string[] mapSettings = v.Split(secondarySeparator);
-
+            MapSelection.acceptMapButton.Invoke((MethodInvoker)(() => MapSelection.acceptMapButton.Enabled = true));
+            playerReady = false;
+            enemyReady = false;
             size =       Convert.ToInt32(mapSettings[1]);
             minheight =  Convert.ToInt32(mapSettings[2]);
             maxheight =  Convert.ToInt32(mapSettings[3]);

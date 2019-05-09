@@ -25,6 +25,7 @@ namespace WarGame_v2
 		Bitmap zoomedmap;
 		public static Form1 form1;
 		public static Label loadLabel;
+		public static Label nrconnLabel;
         public static bool drawStyle = true;
 		public Form1()
 		{
@@ -34,6 +35,7 @@ namespace WarGame_v2
             waterBar.KeyUp += WaterBar_KeyUp;
             bgPictureBox = backgroundPictureBox;
             loadingLabel.Parent = backgroundPictureBox;
+            nrconnLabel = nrConnectedLabel;
 		}
 
         private void WaterBar_KeyUp(object sender, KeyEventArgs e)
@@ -219,6 +221,8 @@ namespace WarGame_v2
                     bool check = Engine.StartServer(ip, result);
                     if (check)
                     {
+                        nrConnectedLabel.Text = "0/2 connected";
+                        nrConnectedLabel.Visible = true;
                         serverStatusLabel.Text = "ok";
                     } 
                 }

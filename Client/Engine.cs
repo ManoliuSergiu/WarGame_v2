@@ -12,8 +12,12 @@ namespace Client
         private static TcpClient client;
         public static char[] mainSeparator = { ':' };
         public static char[] secondarySeparator = { '|' };
-        public static bool team; //true = blue, false = red
+        public static sbyte team = -1; //true = blue, false = red
+        public static bool enemyReady = false;
+        public static bool playerReady = false;
         public static Random rnd = new Random();
+        public static bool online;
+
         internal static bool ConnectToServer(IPAddress ip, int port)
         {
             client = new TcpClient();
@@ -51,7 +55,7 @@ namespace Client
 
         public static void SendString(string data)
         {
-            byte[] msg = Encoding.ASCII.GetBytes(data);
+            byte[] msg = Encoding.ASCII.GetBytes(data+mainSeparator[0]);
             client.GetStream().Write(msg, 0, msg.Length);
         }
 
@@ -62,8 +66,7 @@ namespace Client
                 switch (splitdata[0])
                 {
                     case "Initialization":
-                        if (splitdata[1] == "1") team = true;
-                        else team = false;
+                        team = Convert.ToSByte(splitdata[1]);
                         break;
                     case "MapGeneration":
                         MapSelection.bgPictureBox.Image = GetNewMap(splitdata[1]);
@@ -71,13 +74,32 @@ namespace Client
                     case "WaterLevelChange":
                         if (hMap != null) MapSelection.bgPictureBox.Image = DrawMap(splitdata[1]);
                         break;
-
+                    case "PlayerAccept":
+                        EnemyAcceptMap();
+                        break;
                     default:
                         break;
                 }
             }
         }
 
+        private static void EnemyAcceptMap()
+        {
+            enemyReady = true;
+            if (playerReady)
+            {
+                MapSelection.UnitSelectionPhase();
+            }
+        }
+        public static void PlayerAcceptMap()
+        {
+            playerReady = true;
+            if (enemyReady)
+            {
+                MapSelection.UnitSelectionPhase();
+            }
+            SendString("PlayerAccept" + mainSeparator[0] + team);
+        }
 
     }
 }

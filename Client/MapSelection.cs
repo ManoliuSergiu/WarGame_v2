@@ -12,13 +12,15 @@ namespace Client
 {
     public partial class MapSelection : Form
     {
-        public static PictureBox bgPictureBox;
+        public static PictureBox bgPictureBox; 
+        public static MapSelection form;
+        public static Button acceptMapButton;
+        private static GroupBox mapSelectionGB;
         public static bool style = false;
-        bool online;
         public MapSelection(bool online)
         {
             InitializeComponent();
-            this.online = online;
+            Engine.online = online;
             if (online)
             {
                 OnlineLoad();
@@ -31,6 +33,10 @@ namespace Client
         private void MapSelection_Load(object sender, EventArgs e)
         {
             bgPictureBox = backgroundPictureBox;
+            mapSelectionGB = mapSelectionGroup;
+            acceptMapButton = button2;
+            form = this;
+            mapSelectionGB.Visible = true;
             Bitmap greenscreen = new Bitmap(Engine.size + 1, Engine.size + 1);
             Graphics graphics = Graphics.FromImage(greenscreen);
             graphics.Clear(Color.Green);
@@ -74,8 +80,7 @@ namespace Client
                 case 1:  Engine.maxheight = 70; break;
                 case 2:  Engine.maxheight = 90; break;
                 case 3:  Engine.maxheight = 110; break;
-                case 4:  Engine.maxheight = 130; break;
-                case 5:  Engine.maxheight = 150; break;
+                case 4:  Engine.maxheight = 150; break;
                 case 6:  Engine.maxheight = 170; break;
                 case 7:  Engine.maxheight = 190; break;
                 case 8:  Engine.maxheight = 210; break;
@@ -102,7 +107,7 @@ namespace Client
             Engine.waterlevel = a;
             if (sender == waterBar)
             {
-                if(online) Engine.SendString("MapGeneration:" + Convert.ToInt32(seedTextBox.Text) + "|" + Engine.size + "|" + Engine.minheight + "|" + Engine.maxheight + "|" + Engine.waterlevel + "|" + Engine.offset + ":");
+                if(Engine.online) Engine.SendString("MapGeneration" + Engine.mainSeparator[0] + Convert.ToInt32(seedTextBox.Text) + Engine.secondarySeparator[0] + Engine.size + Engine.secondarySeparator[0] + Engine.minheight + Engine.secondarySeparator[0] + Engine.maxheight + Engine.secondarySeparator[0] + Engine.waterlevel + Engine.secondarySeparator[0] + Engine.offset);
                 else backgroundPictureBox.Image = await Task.Run(() => Engine.DrawMap(a));
 
             }
@@ -117,7 +122,7 @@ namespace Client
         public void GenerateRandomMapButton_Click(object sender, EventArgs e)
         {
             RandomizeSettings(sender, e);
-           GenerateMapButton_Click(sender, e);
+            GenerateMapButton_Click(sender, e);
         }
 
         private void RandomizeSettings(object sender, EventArgs e)
@@ -135,7 +140,7 @@ namespace Client
 
         private async void GenerateMapButton_Click(object sender, EventArgs e)
         {
-            if(online)  Engine.SendString("MapGeneration:" + Convert.ToInt32(seedTextBox.Text) + "|" + Engine.size + "|" + Engine.minheight + "|" + Engine.maxheight + "|" + Engine.waterlevel + "|" + Engine.offset+":");
+            if(Engine.online) Engine.SendString("MapGeneration" + Engine.mainSeparator[0] + Convert.ToInt32(seedTextBox.Text) + Engine.secondarySeparator[0] + Engine.size + Engine.secondarySeparator[0] + Engine.minheight + Engine.secondarySeparator[0] + Engine.maxheight + Engine.secondarySeparator[0] + Engine.waterlevel + Engine.secondarySeparator[0] + Engine.offset); 
             else
             {
                 Bitmap image = await Task.Run(() => Engine.GetNewMap(Convert.ToInt32(seedTextBox.Text), Engine.size, Engine.minheight, Engine.maxheight, Engine.waterlevel, Engine.offset));
@@ -147,6 +152,23 @@ namespace Client
         private void RandomSeedButton_Click(object sender, EventArgs e)
         {
             seedTextBox.Text = "" + Engine.rnd.Next(int.MinValue, int.MaxValue);
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            if (Engine.online)
+            {
+                Engine.PlayerAcceptMap();
+                button2.Enabled = false;
+            }
+            else
+            {
+                UnitSelectionPhase();
+            }
+        }
+        public static void UnitSelectionPhase()
+        {
+            mapSelectionGB.Invoke((MethodInvoker)(() => mapSelectionGB.Visible = false));
         }
     }
 }

@@ -57,9 +57,12 @@
             this.seedTextBox = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.acceptedLabel = new System.Windows.Forms.Label();
             this.modeLabel = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.alternateStyleCheckBox = new System.Windows.Forms.CheckBox();
+            this.mapSelectionGroup = new System.Windows.Forms.GroupBox();
+            this.unitSelectGroup = new System.Windows.Forms.GroupBox();
             this.minHeightGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.smoothnessBar)).BeginInit();
             this.heightVariationGroup.SuspendLayout();
@@ -71,12 +74,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.waterBar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.mapSelectionGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // generateRandomMapButton
             // 
             this.generateRandomMapButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.generateRandomMapButton.Location = new System.Drawing.Point(677, 15);
+            this.generateRandomMapButton.Location = new System.Drawing.Point(150, 8);
             this.generateRandomMapButton.Name = "generateRandomMapButton";
             this.generateRandomMapButton.Size = new System.Drawing.Size(99, 70);
             this.generateRandomMapButton.TabIndex = 20;
@@ -90,7 +94,7 @@
             this.minHeightGroup.Controls.Add(this.label11);
             this.minHeightGroup.Controls.Add(this.label12);
             this.minHeightGroup.Controls.Add(this.smoothnessBar);
-            this.minHeightGroup.Location = new System.Drawing.Point(540, 92);
+            this.minHeightGroup.Location = new System.Drawing.Point(13, 85);
             this.minHeightGroup.Name = "minHeightGroup";
             this.minHeightGroup.Size = new System.Drawing.Size(120, 111);
             this.minHeightGroup.TabIndex = 19;
@@ -140,7 +144,7 @@
             this.heightVariationGroup.Controls.Add(this.label8);
             this.heightVariationGroup.Controls.Add(this.label9);
             this.heightVariationGroup.Controls.Add(this.variationBar);
-            this.heightVariationGroup.Location = new System.Drawing.Point(540, 209);
+            this.heightVariationGroup.Location = new System.Drawing.Point(13, 202);
             this.heightVariationGroup.Name = "heightVariationGroup";
             this.heightVariationGroup.Size = new System.Drawing.Size(120, 111);
             this.heightVariationGroup.TabIndex = 17;
@@ -189,7 +193,7 @@
             this.maxHeightGroup.Controls.Add(this.label5);
             this.maxHeightGroup.Controls.Add(this.label6);
             this.maxHeightGroup.Controls.Add(this.maxHBar);
-            this.maxHeightGroup.Location = new System.Drawing.Point(666, 92);
+            this.maxHeightGroup.Location = new System.Drawing.Point(139, 85);
             this.maxHeightGroup.Name = "maxHeightGroup";
             this.maxHeightGroup.Size = new System.Drawing.Size(120, 111);
             this.maxHeightGroup.TabIndex = 18;
@@ -244,7 +248,7 @@
             // generateMapButton
             // 
             this.generateMapButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.generateMapButton.Location = new System.Drawing.Point(550, 15);
+            this.generateMapButton.Location = new System.Drawing.Point(23, 8);
             this.generateMapButton.Name = "generateMapButton";
             this.generateMapButton.Size = new System.Drawing.Size(99, 70);
             this.generateMapButton.TabIndex = 14;
@@ -258,7 +262,7 @@
             this.waterLevelGroup.Controls.Add(this.label3);
             this.waterLevelGroup.Controls.Add(this.label1);
             this.waterLevelGroup.Controls.Add(this.waterBar);
-            this.waterLevelGroup.Location = new System.Drawing.Point(666, 209);
+            this.waterLevelGroup.Location = new System.Drawing.Point(139, 202);
             this.waterLevelGroup.Name = "waterLevelGroup";
             this.waterLevelGroup.Size = new System.Drawing.Size(120, 111);
             this.waterLevelGroup.TabIndex = 16;
@@ -304,7 +308,7 @@
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.randomSeedButton);
             this.groupBox1.Controls.Add(this.seedTextBox);
-            this.groupBox1.Location = new System.Drawing.Point(540, 326);
+            this.groupBox1.Location = new System.Drawing.Point(13, 319);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(120, 111);
             this.groupBox1.TabIndex = 21;
@@ -341,28 +345,38 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(540, 443);
+            this.button2.Location = new System.Drawing.Point(13, 436);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(246, 70);
             this.button2.TabIndex = 22;
             this.button2.Text = "Accept Map";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.acceptedLabel);
             this.groupBox2.Controls.Add(this.modeLabel);
             this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Location = new System.Drawing.Point(666, 326);
+            this.groupBox2.Location = new System.Drawing.Point(139, 319);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(120, 111);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             // 
+            // acceptedLabel
+            // 
+            this.acceptedLabel.AutoSize = true;
+            this.acceptedLabel.Location = new System.Drawing.Point(23, 80);
+            this.acceptedLabel.Name = "acceptedLabel";
+            this.acceptedLabel.Size = new System.Drawing.Size(0, 13);
+            this.acceptedLabel.TabIndex = 16;
+            // 
             // modeLabel
             // 
             this.modeLabel.AutoSize = true;
             this.modeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modeLabel.Location = new System.Drawing.Point(8, 56);
+            this.modeLabel.Location = new System.Drawing.Point(8, 48);
             this.modeLabel.Name = "modeLabel";
             this.modeLabel.Size = new System.Drawing.Size(0, 20);
             this.modeLabel.TabIndex = 15;
@@ -388,22 +402,42 @@
             this.alternateStyleCheckBox.UseVisualStyleBackColor = true;
             this.alternateStyleCheckBox.CheckedChanged += new System.EventHandler(this.AlternateStyleCheckBox_CheckedChanged);
             // 
+            // mapSelectionGroup
+            // 
+            this.mapSelectionGroup.Controls.Add(this.unitSelectGroup);
+            this.mapSelectionGroup.Controls.Add(this.button2);
+            this.mapSelectionGroup.Controls.Add(this.waterLevelGroup);
+            this.mapSelectionGroup.Controls.Add(this.groupBox2);
+            this.mapSelectionGroup.Controls.Add(this.generateMapButton);
+            this.mapSelectionGroup.Controls.Add(this.maxHeightGroup);
+            this.mapSelectionGroup.Controls.Add(this.groupBox1);
+            this.mapSelectionGroup.Controls.Add(this.heightVariationGroup);
+            this.mapSelectionGroup.Controls.Add(this.generateRandomMapButton);
+            this.mapSelectionGroup.Controls.Add(this.minHeightGroup);
+            this.mapSelectionGroup.Location = new System.Drawing.Point(524, 3);
+            this.mapSelectionGroup.Name = "mapSelectionGroup";
+            this.mapSelectionGroup.Size = new System.Drawing.Size(274, 512);
+            this.mapSelectionGroup.TabIndex = 24;
+            this.mapSelectionGroup.TabStop = false;
+            this.mapSelectionGroup.Visible = false;
+            // 
+            // unitSelectGroup
+            // 
+            this.unitSelectGroup.Location = new System.Drawing.Point(0, 0);
+            this.unitSelectGroup.Name = "unitSelectGroup";
+            this.unitSelectGroup.Size = new System.Drawing.Size(274, 512);
+            this.unitSelectGroup.TabIndex = 25;
+            this.unitSelectGroup.TabStop = false;
+            this.unitSelectGroup.Visible = false;
+            // 
             // MapSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(810, 542);
+            this.ClientSize = new System.Drawing.Size(847, 547);
+            this.Controls.Add(this.mapSelectionGroup);
             this.Controls.Add(this.alternateStyleCheckBox);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.generateRandomMapButton);
-            this.Controls.Add(this.minHeightGroup);
-            this.Controls.Add(this.heightVariationGroup);
-            this.Controls.Add(this.maxHeightGroup);
             this.Controls.Add(this.backgroundPictureBox);
-            this.Controls.Add(this.generateMapButton);
-            this.Controls.Add(this.waterLevelGroup);
             this.Name = "MapSelection";
             this.Text = "MapSelection";
             this.Load += new System.EventHandler(this.MapSelection_Load);
@@ -424,6 +458,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.mapSelectionGroup.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -463,5 +498,8 @@
         private System.Windows.Forms.Label modeLabel;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.CheckBox alternateStyleCheckBox;
+        private System.Windows.Forms.Label acceptedLabel;
+        private System.Windows.Forms.GroupBox mapSelectionGroup;
+        private System.Windows.Forms.GroupBox unitSelectGroup;
     }
 }

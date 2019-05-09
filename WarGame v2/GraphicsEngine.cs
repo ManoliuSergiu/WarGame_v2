@@ -11,7 +11,7 @@ namespace WarGame_v2
 
 		public static  Bitmap GetNewMap(int seed,int size = 512, int min = 5, int max = 255, int waterLevel = 60, int offset = 120)
 		{
-            SendString("MapGeneration:"+seed+"|"+size + "|" +min + "|" +max + "|" +waterLevel + "|" +offset + ":");
+            SendString("MapGeneration:"+seed+"|"+size + "|" +min + "|" +max + "|" +waterLevel + "|" +offset);
 			Form1.loadLabel.Invoke((MethodInvoker)(() => Form1.loadLabel.Visible = true));
 			hMap =  DiamondSquareGen.Generate(seed, size, min, max,offset);
 			zoomedMap = GenerateZoomedMap(size);
