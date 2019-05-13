@@ -170,5 +170,6 @@ namespace Client
         {
             mapSelectionGB.Invoke((MethodInvoker)(() => mapSelectionGB.Visible = false));
         }
+
     }
 }

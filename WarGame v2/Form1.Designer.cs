@@ -475,7 +475,7 @@
             this.Controls.Add(this.generateMapButton);
             this.Controls.Add(this.waterLevelGroup);
             this.Name = "Form1";
-            this.Text = "WarGameServer";
+            this.Text = "***";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.backgroundPictureBox)).EndInit();
             this.waterLevelGroup.ResumeLayout(false);

@@ -63,6 +63,26 @@
             this.alternateStyleCheckBox = new System.Windows.Forms.CheckBox();
             this.mapSelectionGroup = new System.Windows.Forms.GroupBox();
             this.unitSelectGroup = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.specialButton = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cavalryButton = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.artilleryButton = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.infantryButton = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.rangedButton = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lordButton = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.minHeightGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.smoothnessBar)).BeginInit();
             this.heightVariationGroup.SuspendLayout();
@@ -75,6 +95,13 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.mapSelectionGroup.SuspendLayout();
+            this.unitSelectGroup.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // generateRandomMapButton
@@ -239,7 +266,7 @@
             // 
             // backgroundPictureBox
             // 
-            this.backgroundPictureBox.Location = new System.Drawing.Point(4, 2);
+            this.backgroundPictureBox.Location = new System.Drawing.Point(4, -1);
             this.backgroundPictureBox.Name = "backgroundPictureBox";
             this.backgroundPictureBox.Size = new System.Drawing.Size(513, 513);
             this.backgroundPictureBox.TabIndex = 15;
@@ -423,6 +450,12 @@
             // 
             // unitSelectGroup
             // 
+            this.unitSelectGroup.Controls.Add(this.groupBox7);
+            this.unitSelectGroup.Controls.Add(this.groupBox5);
+            this.unitSelectGroup.Controls.Add(this.groupBox8);
+            this.unitSelectGroup.Controls.Add(this.groupBox4);
+            this.unitSelectGroup.Controls.Add(this.groupBox6);
+            this.unitSelectGroup.Controls.Add(this.groupBox3);
             this.unitSelectGroup.Location = new System.Drawing.Point(0, 0);
             this.unitSelectGroup.Name = "unitSelectGroup";
             this.unitSelectGroup.Size = new System.Drawing.Size(274, 512);
@@ -430,11 +463,205 @@
             this.unitSelectGroup.TabStop = false;
             this.unitSelectGroup.Visible = false;
             // 
+            // groupBox7
+            // 
+            this.groupBox7.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox7.Controls.Add(this.specialButton);
+            this.groupBox7.Location = new System.Drawing.Point(142, 338);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(122, 155);
+            this.groupBox7.TabIndex = 5;
+            this.groupBox7.TabStop = false;
+            // 
+            // specialButton
+            // 
+            this.specialButton.Location = new System.Drawing.Point(7, 13);
+            this.specialButton.Name = "specialButton";
+            this.specialButton.Size = new System.Drawing.Size(108, 55);
+            this.specialButton.TabIndex = 3;
+            this.specialButton.Text = "Special";
+            this.specialButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox5.Controls.Add(this.label21);
+            this.groupBox5.Controls.Add(this.label22);
+            this.groupBox5.Controls.Add(this.cavalryButton);
+            this.groupBox5.Location = new System.Drawing.Point(142, 178);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(122, 155);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            // 
+            // cavalryButton
+            // 
+            this.cavalryButton.Location = new System.Drawing.Point(7, 13);
+            this.cavalryButton.Name = "cavalryButton";
+            this.cavalryButton.Size = new System.Drawing.Size(108, 55);
+            this.cavalryButton.TabIndex = 3;
+            this.cavalryButton.Text = "Cavalry";
+            this.cavalryButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox8.Controls.Add(this.artilleryButton);
+            this.groupBox8.Location = new System.Drawing.Point(10, 338);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(122, 155);
+            this.groupBox8.TabIndex = 4;
+            this.groupBox8.TabStop = false;
+            // 
+            // artilleryButton
+            // 
+            this.artilleryButton.Location = new System.Drawing.Point(7, 12);
+            this.artilleryButton.Name = "artilleryButton";
+            this.artilleryButton.Size = new System.Drawing.Size(109, 55);
+            this.artilleryButton.TabIndex = 2;
+            this.artilleryButton.Text = "Artillery";
+            this.artilleryButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.Controls.Add(this.label18);
+            this.groupBox4.Controls.Add(this.infantryButton);
+            this.groupBox4.Location = new System.Drawing.Point(142, 18);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(122, 155);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            // 
+            // infantryButton
+            // 
+            this.infantryButton.Location = new System.Drawing.Point(7, 13);
+            this.infantryButton.Name = "infantryButton";
+            this.infantryButton.Size = new System.Drawing.Size(108, 55);
+            this.infantryButton.TabIndex = 1;
+            this.infantryButton.Text = "Infantry";
+            this.infantryButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox6.Controls.Add(this.label19);
+            this.groupBox6.Controls.Add(this.label20);
+            this.groupBox6.Controls.Add(this.rangedButton);
+            this.groupBox6.Location = new System.Drawing.Point(10, 178);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(122, 155);
+            this.groupBox6.TabIndex = 2;
+            this.groupBox6.TabStop = false;
+            // 
+            // rangedButton
+            // 
+            this.rangedButton.Location = new System.Drawing.Point(7, 12);
+            this.rangedButton.Name = "rangedButton";
+            this.rangedButton.Size = new System.Drawing.Size(109, 55);
+            this.rangedButton.TabIndex = 2;
+            this.rangedButton.Text = "Ranged";
+            this.rangedButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.lordButton);
+            this.groupBox3.Location = new System.Drawing.Point(10, 18);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(122, 155);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            // 
+            // lordButton
+            // 
+            this.lordButton.Location = new System.Drawing.Point(7, 12);
+            this.lordButton.Name = "lordButton";
+            this.lordButton.Size = new System.Drawing.Size(109, 55);
+            this.lordButton.TabIndex = 0;
+            this.lordButton.Text = "Lord";
+            this.lordButton.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(8, 70);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(34, 13);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Armor";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(61, 70);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(48, 13);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Weapon";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(63, 71);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(48, 13);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "Weapon";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(13, 71);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(34, 13);
+            this.label18.TabIndex = 3;
+            this.label18.Text = "Armor";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(64, 71);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(48, 13);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "Weapon";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(11, 71);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(34, 13);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "Armor";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(67, 71);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(48, 13);
+            this.label21.TabIndex = 5;
+            this.label21.Text = "Weapon";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(14, 71);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(34, 13);
+            this.label22.TabIndex = 4;
+            this.label22.Text = "Armor";
+            // 
             // MapSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(847, 547);
+            this.ClientSize = new System.Drawing.Size(806, 546);
             this.Controls.Add(this.mapSelectionGroup);
             this.Controls.Add(this.alternateStyleCheckBox);
             this.Controls.Add(this.backgroundPictureBox);
@@ -459,6 +686,17 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.mapSelectionGroup.ResumeLayout(false);
+            this.unitSelectGroup.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -501,5 +739,25 @@
         private System.Windows.Forms.Label acceptedLabel;
         private System.Windows.Forms.GroupBox mapSelectionGroup;
         private System.Windows.Forms.GroupBox unitSelectGroup;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button cavalryButton;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button infantryButton;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button rangedButton;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button lordButton;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Button specialButton;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Button artilleryButton;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
     }
 }
