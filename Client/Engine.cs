@@ -4,14 +4,18 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Client
 {
     public static partial class Engine
     {
         private static TcpClient client;
-        public static char[] mainSeparator = { ':' };
-        public static char[] secondarySeparator = { '|' };
+        private static Queue<string> stringsToInterpret = new Queue<string>();
+        public static char[] messageSeparator = { '~' };
+        public static char[] mainSeparator = { '|' };
+        public static char[] secondarySeparator = { '$' };
         public static sbyte team = -1; //true = blue, false = red
         public static bool enemyReady = false;
         public static bool playerReady = false;
@@ -47,38 +51,47 @@ namespace Client
                 data = Encoding.ASCII.GetString(bytes, 0, i);
                 if (i != 0)
                 {
-                    InterpretString(data);
-                    Debug.WriteLine(data);
+                    stringsToInterpret.Enqueue(data);
+                    Debug.WriteLine("Server recieved: " + data);
+                }
+                while (stringsToInterpret.Count != 0)
+                {
+                    InterpretString(stringsToInterpret.Dequeue());
                 }
             }
         }
 
         public static void SendString(string data)
         {
-            byte[] msg = Encoding.ASCII.GetBytes(data+mainSeparator[0]);
+            byte[] msg = Encoding.ASCII.GetBytes(data+ messageSeparator[0]);
             client.GetStream().Write(msg, 0, msg.Length);
         }
 
-        private static void InterpretString(string data)
+        private static void InterpretString(string incomingData)
         {
-            string[] splitdata = data.Split(mainSeparator, StringSplitOptions.RemoveEmptyEntries);
+            string[] messages = incomingData.Split(messageSeparator,StringSplitOptions.RemoveEmptyEntries);
+            foreach (string message in messages)
             {
-                switch (splitdata[0])
+                string[] splitdata = message.Split(mainSeparator, StringSplitOptions.RemoveEmptyEntries);
                 {
-                    case "Initialization":
-                        team = Convert.ToSByte(splitdata[1]);
-                        break;
-                    case "MapGeneration":
-                        MapSelection.bgPictureBox.Image = GetNewMap(splitdata[1]);
-                        break;
-                    case "WaterLevelChange":
-                        if (hMap != null) MapSelection.bgPictureBox.Image = DrawMap(splitdata[1]);
-                        break;
-                    case "PlayerAccept":
-                        EnemyAcceptMap();
-                        break;
-                    default:
-                        break;
+                    switch (splitdata[0])
+                    {
+                        case "Initialization":
+                            team = Convert.ToSByte(splitdata[1]);
+                            break;
+                        case "MapGeneration":
+                            MapSelection.bgPictureBox.Image = GetNewMap(splitdata[1]);
+                            break;
+                        case "WaterLevelChange":
+                            if (hMap != null) MapSelection.bgPictureBox.Image = DrawMap(splitdata[1]);
+                            break;
+                        case "PlayerAccept":
+                            EnemyAcceptMap();
+                            break;
+                        default:
+                            MessageBox.Show("This shouldn't have happened...the " + splitdata[0] + " command could not be interpreted so it's probably a server side error.", "Client Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                    }
                 }
             }
         }

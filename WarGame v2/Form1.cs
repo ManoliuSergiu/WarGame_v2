@@ -123,7 +123,7 @@ namespace WarGame_v2
             if (sender == waterBar)
             {
                 backgroundPictureBox.Image = map = await Task.Run(() => Engine.DrawMap(a));
-                Engine.SendString("WaterLevelChange:" + waterlevel);
+                Engine.SendString("WaterLevelChange"+Engine.mainSeparator[0] + waterlevel);
 
             }
         }
